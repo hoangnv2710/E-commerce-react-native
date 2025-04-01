@@ -6,6 +6,7 @@ export default function Address() {
         <View style={styles.address} >
             <Ionicons name="location-sharp" size={20} color="#fff" />
             <Text style={{
+                paddingLeft: 4,
                 color: "#fff",
                 fontSize: 15,
                 fontWeight: 500
@@ -19,7 +20,7 @@ export default function Address() {
 const styles = StyleSheet.create({
     address: {
         flexDirection: "row",
-        paddingLeft: 10,
+        paddingLeft: 15,
         paddingBottom: 10,
     }
 });

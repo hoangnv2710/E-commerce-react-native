@@ -5,11 +5,13 @@ import BestSeller from "@/components/HomePage/BestSellers.Hompage";
 import Categories from "@/components/HomePage/Categories .HomePage";
 import ProductList from "@/components/HomePage/ProductList.Hompage";
 import SearchBar from "@/components/HomePage/SearchBar.HomePage";
+import { Redirect } from "expo-router";
+
 import { FlatList, SafeAreaView, StyleSheet, View, Text, ScrollView } from "react-native";
 
 
 export default function HomePageTab() {
-
+    if (true) { <Redirect href={'/(auth)/login'} /> }
     return (
         <SafeAreaView style={styles.container}>
             <SearchBar />
@@ -37,16 +39,13 @@ const styles = StyleSheet.create({
     body: {
         paddingTop: 10,
         width: "100%",
-        backgroundColor: "#d0d8ff",
+        backgroundColor: "#e6f5ff",
         paddingRight: "2%",
         paddingLeft: "2%",
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+    },
 
-    },
-    line: {
-        width: "100%",
-        height: 5,
-        backgroundColor: "#869bff"
-    },
     list: {
         overflow: "hidden"
     },

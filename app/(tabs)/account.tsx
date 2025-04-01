@@ -1,11 +1,12 @@
-import { Link } from 'expo-router';
+import { Link, Redirect } from 'expo-router';
 import { View, Text, StyleSheet } from 'react-native';
 
 export default function Tab() {
+
     return (
         <View style={styles.container}>
-            <Text>Tab [Home|Settings]</Text>
-
+            <Redirect href={'/(auth)/login'} />
+            <Link href={'/(auth)/login'}>clickme</Link>
         </View>
     );
 }

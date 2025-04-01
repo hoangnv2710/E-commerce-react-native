@@ -1,3 +1,4 @@
+import { APP_COLOR } from "@/utils/constant";
 import { DarkTheme, DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { Stack } from "expo-router";
 import { SafeAreaView, useColorScheme } from "react-native";
@@ -9,7 +10,7 @@ export default function RootLayout() {
         ...DefaultTheme,
         colors: {
             ...DefaultTheme.colors,
-            background: "#1f47ff",
+            background: APP_COLOR.DARK_BLUE,
         },
     };
 
