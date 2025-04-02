@@ -13,7 +13,8 @@ import { FlatList, SafeAreaView, StyleSheet, View, Text, ScrollView } from "reac
 export default function HomePageTab() {
     if (true) { <Redirect href={'/(auth)/login'} /> }
     return (
-        <SafeAreaView style={styles.container}>
+        // <SafeAreaView style={styles.container}>
+        <View>
             <SearchBar />
             <ScrollView
                 showsVerticalScrollIndicator={false}
@@ -28,7 +29,9 @@ export default function HomePageTab() {
                 </View>
 
             </ScrollView>
-        </SafeAreaView>
+        </View>
+
+        // </SafeAreaView>
     );
 }
 

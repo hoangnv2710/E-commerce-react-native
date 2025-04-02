@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { StatusBar } from "expo-status-bar";
+
 
 export default function SearchBar() {
     return (
         <View style={styles.container}>
-            <StatusBar />
+
             <View style={styles.searchInput} >
                 <FontAwesome name="search" size={24} color="blue" paddingRight="10" />
                 <Text style={{
@@ -23,7 +23,7 @@ export default function SearchBar() {
 const styles = StyleSheet.create({
     container: {
         // backgroundColor: "blue",
-        height: 100,
+        height: 80,
     },
     searchInput: {
         flexDirection: "row",
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
         height: 40,
         width: "95%",
         paddingLeft: 10,
-        marginTop: 45,
+        marginTop: 25,
         backgroundColor: "#fff",
         borderRadius: 15
     }
