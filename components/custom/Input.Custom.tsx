@@ -26,17 +26,18 @@ export default function CustomInput(props: IProps) {
 
 const styles = StyleSheet.create({
     container: {
-
+        marginBottom: 10,
     },
     title: {
         color: "black",
         fontSize: 20,
         fontWeight: 600,
-
+        marginBottom: 5,
     },
     input: {
-        // borderColor: "black",
-        borderBottomWidth: 2,
-        width: "90%"
+        borderWidth: 2,
+        // borderColor: APP_COLOR.LIGHT_BLUE,
+        borderRadius: 10,
+        backgroundColor: "transparent",
     }
 })

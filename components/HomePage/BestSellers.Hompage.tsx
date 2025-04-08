@@ -14,9 +14,13 @@ export default function BestSeller() {
             <Text style={styles.title} > Best Sellers </Text>
             <FlatList
                 style={styles.container}
-                contentContainerStyle={{ gap: 5 }}
+                contentContainerStyle={{ gap: 10 }}
                 data={products}
-                renderItem={({ item }) => <ProductItem name={item.name} price={item.price} image={item.image} />}
+                renderItem={({ item }) => <ProductItem
+                    name={item.name}
+                    price={item.price}
+                    image={item.image}
+                    itemStyle={{ width: 180 }} />}
                 keyExtractor={(item) => item.id}
                 horizontal
             >

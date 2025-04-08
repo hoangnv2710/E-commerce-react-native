@@ -11,7 +11,7 @@ import { FlatList, SafeAreaView, StyleSheet, View, Text, ScrollView } from "reac
 
 
 export default function HomePageTab() {
-    if (true) { <Redirect href={'/(auth)/login'} /> }
+
     return (
         // <SafeAreaView style={styles.container}>
         <View>

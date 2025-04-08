@@ -1,5 +1,6 @@
 import CustomBtn from "@/components/custom/Button.Custom";
 import CustomInput from "@/components/custom/Input.Custom";
+import { APP_COLOR } from "@/utils/constant";
 import { AntDesign } from "@expo/vector-icons";
 import { Link } from "expo-router";
 import { useState } from "react";
@@ -14,7 +15,7 @@ export default function LogInPage() {
 
     return (
         <View style={styles.container}>
-            {/* <Text style={styles.greeting} > Hello{"\n"} Sign in!</Text> */}
+            <Text style={styles.greeting} > Welcome back!</Text>
             <View style={styles.linkContainer}>
                 <View style={styles.underline}>
                     <Text style={styles.link}>Login</Text>
@@ -28,15 +29,20 @@ export default function LogInPage() {
             <CustomInput title="Password" value={password} setValue={setPassword} />
             <CustomBtn onPress={onPressFunction}
                 btnStyle={{
-                    marginTop: 10,
-                    padding: 5,
+                    marginTop: 30,
+                    paddingVertical: 10,
+                    width: "100%",
+                    backgroundColor: APP_COLOR.DARK_BLUE,
+                    borderWidth: 0,
+                    borderRadius: 10,
                 }}
                 textStyle={{
-                    color: "blue",
+                    color: "#fff",
+                    fontWeight: 600,
+                    fontSize: 18
                 }}
-                icon={<AntDesign name="login" size={24} color="black" />}
-                title="hello" />
-            <Link href={'/(tabs)'}>clickme</Link>
+                title="LOGIN" />
+            <Link href={'/(tabs)'}>back home</Link>
 
         </View>
     )
@@ -44,8 +50,7 @@ export default function LogInPage() {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 30,
-        paddingLeft: 30,
+        padding: 30,
         backgroundColor: "#e6f5ff",
         height: "100%"
     },
@@ -57,6 +62,7 @@ const styles = StyleSheet.create({
     linkContainer: {
         flexDirection: "row",
         gap: 10,
+        marginVertical: 50,
     },
     link: {
         fontWeight: 700,

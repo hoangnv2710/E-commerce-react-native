@@ -1,47 +1,59 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity, StyleProp, ViewStyle } from "react-native";
 
 interface IProps {
     name: string,
     price: string,
     image: number,
+    itemStyle?: StyleProp<ViewStyle>,
 }
 
 export default function ProductItem(props: IProps) {
-    const { name, price, image } = props;
+    const { name, price, image, itemStyle } = props;
     return (
-        <TouchableOpacity style={styles.container}>
+        <View style={[styles.container, itemStyle]}>
+            {/*  */}
             <Image
                 source={image}
                 style={styles.image} />
-            <Text style={styles.name}>{name}</Text>
-            <Text style={styles.price}>{price} VND</Text>
-        </TouchableOpacity>
+            <View style={styles.infoContainer}>
+                <Text style={styles.name}>{name}</Text>
+                <Text style={styles.price}>{price} VND</Text>
+            </View>
+
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        // padding: 10,
         backgroundColor: "#fff",
-        // margin: 5,
         borderRadius: 10,
         alignItems: "center",
+        overflow: "hidden",
+        width: "49%",
+        height: 250,
     },
     image: {
-        width: 150,
-        height: 150,
+        width: "100%",
+        height: 180,
         borderRadius: 10,
+    },
+    infoContainer: {
+        width: "100%",
+        paddingLeft: 10,
+        justifyContent: "flex-start",
     },
     name: {
         fontSize: 16,
-        fontWeight: "bold",
+        // fontWeight: "bold",
         marginTop: 5,
     },
     price: {
         color: "red",
         marginTop: 5,
+        fontWeight: "500",
+        fontSize: 16
     },
 });
 

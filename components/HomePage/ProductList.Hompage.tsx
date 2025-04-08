@@ -4,12 +4,12 @@ import ProductItem from "./ProductItem.HomePage";
 
 
 const products = [
-    { id: "1", name: "iPhone 14", price: "20,000,000", image: require("@/assets/icons/phone.jpg") },
-    { id: "2", name: "MacBook Air", price: "25,000,000", image: require("@/assets/icons/phone.jpg") },
+    { id: "1", name: "iPhone 14", price: "20", image: require("@/assets/icons/phone.jpg") },
+    { id: "2", name: "MacBook Air", price: "25,000,000", image: require("@/assets/icons/mac.jpg") },
     { id: "3", name: "iPhone 14", price: "20,000,000", image: require("@/assets/icons/phone.jpg") },
-    { id: "4", name: "MacBook Air", price: "25,000,000", image: require("@/assets/icons/phone.jpg") },
+    { id: "4", name: "MacBook Air", price: "25,000,000", image: require("@/assets/icons/mac.jpg") },
     { id: "5", name: "iPhone 14", price: "20,000,000", image: require("@/assets/icons/phone.jpg") },
-    { id: "6", name: "MacBook Air", price: "25,000,000", image: require("@/assets/icons/phone.jpg") },
+    { id: "6", name: "MacBook Air", price: "25,000,000", image: require("@/assets/icons/mac.jpg") },
 ];
 
 export default function ProductList() {
@@ -17,8 +17,8 @@ export default function ProductList() {
         <View>
             <Text style={styles.title} > Product List </Text>
             <FlatList style={styles.container}
-                contentContainerStyle={{ gap: 5 }}
-                columnWrapperStyle={{ gap: 5 }}
+                contentContainerStyle={{ gap: 10 }}
+                columnWrapperStyle={{ justifyContent: 'space-between' }}
                 data={products}
                 scrollEnabled={false}
                 renderItem={({ item }) => <ProductItem name={item.name} price={item.price} image={item.image} />}
@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
     container: {
         // marginTop: 10,
         width: "100%",
-        alignSelf: "center"
+        alignSelf: "center",
+
     },
     title: {
         fontWeight: "600",

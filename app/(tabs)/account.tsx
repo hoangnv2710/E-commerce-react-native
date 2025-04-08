@@ -5,8 +5,8 @@ export default function Tab() {
 
     return (
         <View style={styles.container}>
-            <Redirect href={'/(auth)/login'} />
-            <Link href={'/(auth)/login'}>clickme</Link>
+            {/* <Redirect href={'/(auth)/login'} />
+            <Link href={'/(auth)/login'}>clickme</Link> */}
         </View>
     );
 }
