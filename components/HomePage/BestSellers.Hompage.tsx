@@ -22,7 +22,7 @@ export default function BestSeller() {
                     name={item.name}
                     price={item.price}
                     image={item.image}
-                    itemStyle={{ width: 180 }} />}
+                    itemStyle={{ width: 180, height: 250 }} />}
                 keyExtractor={(item) => item.id}
                 horizontal
             >

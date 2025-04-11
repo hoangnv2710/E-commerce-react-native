@@ -3,7 +3,7 @@ import { Pressable, StyleProp, StyleSheet, Text, TextStyle, View, ViewStyle } fr
 
 interface IProps {
     onPress: any,
-    title: string,
+    title?: string,
     btnStyle?: StyleProp<ViewStyle>,
     pressStyle?: StyleProp<ViewStyle>,
     textStyle?: StyleProp<TextStyle>,
@@ -20,7 +20,7 @@ export default function CustomBtn(props: IProps) {
 
             <View style={[styles.container, btnStyle]} >
                 {icon}
-                <Text style={textStyle}>{title} </Text>
+                {/* <Text style={textStyle}>{title} </Text> */}
 
             </View>
 
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 2,
         margin: 2,
-        alignSelf: "flex-start"
+        alignSelf: "flex-start",
+
     }
 })
