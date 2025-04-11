@@ -1,5 +1,7 @@
+import { router } from "expo-router";
 import React from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity, StyleProp, ViewStyle } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity, StyleProp, ViewStyle, Pressable } from "react-native";
+
 
 interface IProps {
     name: string,
@@ -11,7 +13,8 @@ interface IProps {
 export default function ProductItem(props: IProps) {
     const { name, price, image, itemStyle } = props;
     return (
-        <View style={[styles.container, itemStyle]}>
+        <Pressable onPress={() => { router.navigate("/product/id") }}
+            style={[styles.container, itemStyle]}>
             {/*  */}
             <Image
                 source={image}
@@ -21,7 +24,7 @@ export default function ProductItem(props: IProps) {
                 <Text style={styles.price}>{price} VND</Text>
             </View>
 
-        </View>
+        </Pressable>
     );
 };
 

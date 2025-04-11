@@ -2,13 +2,13 @@ import CustomBtn from "@/components/custom/Button.Custom";
 import CustomInput from "@/components/custom/Input.Custom";
 import { APP_COLOR } from "@/utils/constant";
 import { AntDesign } from "@expo/vector-icons";
-import { Link } from "expo-router";
+import { Link, Redirect, router } from "expo-router";
 import { useState } from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function LogInPage() {
     const onPressFunction = () => {
-        alert('press')
+        router.replace("/(tabs)");
     };
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");

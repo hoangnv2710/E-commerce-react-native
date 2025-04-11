@@ -15,8 +15,6 @@ export default function RootLayout() {
     };
 
     return (
-
-
         <ThemeProvider value={layoutTheme}>
             <SafeAreaView style={{ flex: 1 }} >
                 <StatusBar backgroundColor={APP_COLOR.DARK_BLUE} />
@@ -30,7 +28,15 @@ export default function RootLayout() {
                         options={{ headerShown: false }}
                     />
                     <Stack.Screen
-                        name="(auth)"
+                        name="(auth)/signup"
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                        name="category/index"
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                        name="product/id"
                         options={{ headerShown: false }}
                     />
                 </Stack>

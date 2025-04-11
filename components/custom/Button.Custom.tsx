@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 import { Pressable, StyleProp, StyleSheet, Text, TextStyle, View, ViewStyle } from "react-native";
-import AntDesign from '@expo/vector-icons/AntDesign';
 
 interface IProps {
     onPress: any,
@@ -22,6 +21,7 @@ export default function CustomBtn(props: IProps) {
             <View style={[styles.container, btnStyle]} >
                 {icon}
                 <Text style={textStyle}>{title} </Text>
+
             </View>
 
         </Pressable>

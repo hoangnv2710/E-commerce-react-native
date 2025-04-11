@@ -13,25 +13,23 @@ import { FlatList, SafeAreaView, StyleSheet, View, Text, ScrollView } from "reac
 export default function HomePageTab() {
 
     return (
-        // <SafeAreaView style={styles.container}>
-        <View>
+        <SafeAreaView style={{ flex: 1 }}>
             <SearchBar />
             <ScrollView
                 showsVerticalScrollIndicator={false}
-            >
+                style={{ flex: 1 }}>
                 <Address />
                 {/* <View style={styles.line} /> */}
                 <View style={styles.body}>
                     <Banner />
                     <Categories />
                     <BestSeller />
-                    <ProductList />
+                    <ProductList title="Product list" />
                 </View>
 
             </ScrollView>
-        </View>
 
-        // </SafeAreaView>
+        </SafeAreaView>
     );
 }
 

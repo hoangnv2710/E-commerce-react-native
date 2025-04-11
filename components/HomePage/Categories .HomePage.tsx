@@ -1,4 +1,6 @@
-import { StyleSheet, Text, View, FlatList, ScrollView, Image } from "react-native";
+import { router } from "expo-router";
+import { StyleSheet, Text, View, FlatList, ScrollView, Image, Pressable } from "react-native";
+
 
 export default function Categories() {
     return (
@@ -20,19 +22,21 @@ export default function Categories() {
                         data={data1}
                         renderItem={({ item, index }) => {
                             return (
-                                <View style={{
-                                    margin: 5,
-                                    width: 90, height: 90,
-                                    alignItems: "center"
-                                }}>
-                                    <Image source={item.source}
-                                        style={{
-                                            width: 80,
-                                            height: 80
-                                        }}
-                                    />
-                                    <Text>{item.name}</Text>
-                                </View>
+                                <Pressable onPress={() => { router.navigate("/category") }}>
+                                    <View style={{
+                                        margin: 5,
+                                        width: 90, height: 90,
+                                        alignItems: "center"
+                                    }}>
+                                        <Image source={item.source}
+                                            style={{
+                                                width: 80,
+                                                height: 80
+                                            }}
+                                        />
+                                        <Text>{item.name}</Text>
+                                    </View>
+                                </Pressable>
                             )
                         }}
                     />

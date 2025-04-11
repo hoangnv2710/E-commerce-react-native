@@ -10,12 +10,18 @@ const products = [
     { id: "4", name: "MacBook Air", price: "25,000,000", image: require("@/assets/icons/mac.jpg") },
     { id: "5", name: "iPhone 14", price: "20,000,000", image: require("@/assets/icons/phone.jpg") },
     { id: "6", name: "MacBook Air", price: "25,000,000", image: require("@/assets/icons/mac.jpg") },
-];
+    { id: "7", name: "iPhone 14", price: "20,000,000", image: require("@/assets/icons/phone.jpg") },
+    { id: "8", name: "MacBook Air", price: "25,000,000", image: require("@/assets/icons/mac.jpg") },
 
-export default function ProductList() {
+];
+interface IProps {
+    title: string,
+}
+export default function ProductList(props: IProps) {
+    const { title } = props;
     return (
         <View>
-            <Text style={styles.title} > Product List </Text>
+            <Text style={styles.title} > {title} </Text>
             <FlatList style={styles.container}
                 contentContainerStyle={{ gap: 10 }}
                 columnWrapperStyle={{ justifyContent: 'space-between' }}
