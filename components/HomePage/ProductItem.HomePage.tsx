@@ -1,3 +1,4 @@
+import { APP_COLOR } from "@/utils/constant";
 import { router } from "expo-router";
 import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity, StyleProp, ViewStyle, Pressable } from "react-native";
@@ -33,14 +34,17 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         borderRadius: 10,
         alignItems: "center",
-        overflow: "hidden",
+        // overflow: "hidden",
         width: "49%",
         height: 250,
+        borderWidth: 1,
+        borderColor: "rgba(0,0,255,0.1)",
     },
     image: {
         width: "100%",
         height: 180,
         borderRadius: 10,
+
     },
     infoContainer: {
         width: "100%",
@@ -53,7 +57,7 @@ const styles = StyleSheet.create({
         marginTop: 5,
     },
     price: {
-        color: "red",
+        color: APP_COLOR.DARK_BLUE,
         marginTop: 5,
         fontWeight: "500",
         fontSize: 16

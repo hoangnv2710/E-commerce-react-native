@@ -42,7 +42,7 @@ export default function LogInPage() {
                     fontSize: 18
                 }}
                 title="LOGIN" />
-            <Link href={'/(tabs)'}>back home</Link>
+            {/* <Link href={'/(tabs)'}>back home</Link> */}
 
         </View>
     )

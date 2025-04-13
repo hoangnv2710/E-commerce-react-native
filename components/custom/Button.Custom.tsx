@@ -20,7 +20,7 @@ export default function CustomBtn(props: IProps) {
 
             <View style={[styles.container, btnStyle]} >
                 {icon}
-                {/* <Text style={textStyle}>{title} </Text> */}
+                <Text style={textStyle}>{title} </Text>
 
             </View>
 

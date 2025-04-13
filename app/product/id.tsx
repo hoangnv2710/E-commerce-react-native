@@ -14,26 +14,36 @@ export default function ProductDetail() {
                         source={ex.image}
                         style={styles.image} />
                     <View style={styles.infoContainer}>
-                        <Text style={styles.name}>{ex.name}</Text>
                         <Text style={styles.price}>{ex.price} VND</Text>
-                        <CustomBtn title="Add to cart"
-                            onPress={() => { alert("Thêm vào giỏ hàng thành công!") }}
-                            btnStyle={{
-                                marginTop: 10,
-                                padding: 10,
-                                borderWidth: 0,
-                                backgroundColor: APP_COLOR.DARK_BLUE
-                            }}
-                            textStyle={{
-                                color: "#fff",
-                                fontSize: 20
-                            }}
-                            icon={<FontAwesome name="shopping-cart" size={24} color="#fff" />} />
+                        <Text style={styles.name}>{ex.name}</Text>
+
+
                         <Text style={styles.description} >Description</Text>
                         <Text>{ex.description} </Text>
                     </View>
                 </View>
             </ScrollView>
+            <View style={styles.checkout}>
+                <View style={styles.totalContainer}>
+                    {/* <Text style={styles.total}>Total </Text> */}
+                    <Text style={styles.totalPrice}> {ex.price} VND</Text>
+                </View>
+                <View style={styles.checkoutBtn}>
+                    <CustomBtn title="Add to cart"
+                        onPress={() => { alert("Thêm vào giỏ hàng thành công!") }}
+                        btnStyle={{
+
+                            padding: 8,
+                            borderWidth: 0,
+                            backgroundColor: APP_COLOR.DARK_BLUE
+                        }}
+                        textStyle={{
+                            color: "#fff",
+                            fontSize: 18
+                        }}
+                        icon={<FontAwesome name="shopping-cart" size={24} color="#fff" />} />
+                </View>
+            </View>
         </SafeAreaView>
     );
 };
@@ -53,25 +63,60 @@ const styles = StyleSheet.create({
     },
     infoContainer: {
         width: "100%",
-        paddingLeft: 10,
+        paddingHorizontal: 10,
         justifyContent: "flex-start",
     },
     name: {
-        fontSize: 30,
-        fontWeight: "bold",
+        fontSize: 18,
+        fontWeight: "400",
         marginTop: 5,
+        paddingBottom: 5,
     },
     price: {
-        color: "red",
-        marginTop: 5,
+        color: APP_COLOR.DARK_BLUE,
+        marginTop: 10,
         fontWeight: "500",
-        fontSize: 20
+        fontSize: 20,
+
     },
     description: {
-        fontSize: 20,
+        fontSize: 17,
         fontWeight: "bold",
+        paddingTop: 5,
         marginTop: 5,
-    }
+        borderTopWidth: 1,
+        borderColor: "#ccc"
+    },
+    checkout: {
+        height: 60,
+        flexDirection: "row",
+        elevation: 10,
+        borderTopWidth: 1,
+        borderColor: "rgba(0,0,0,0.1)",
+        backgroundColor: "#fff"
+    },
+    totalContainer: {
+        flex: 1,
+        flexDirection: "row",
+        alignItems: "center",
+        paddingLeft: 20
+    },
+    totalPrice: {
+        fontSize: 22,
+        fontWeight: "bold",
+        color: APP_COLOR.DARK_BLUE
+    },
+    total: {
+        fontSize: 26,
+        fontWeight: "500",
+
+    },
+    checkoutBtn: {
+        flex: 1, flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "flex-end",
+        paddingRight: 20
+    },
 });
 const ex = {
     id: "1", name: "Điện thoại iphone 14", price: "20,000,000", image: require("@/assets/icons/phone.jpg"),

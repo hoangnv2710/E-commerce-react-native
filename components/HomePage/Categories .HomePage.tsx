@@ -24,9 +24,10 @@ export default function Categories() {
                             return (
                                 <Pressable onPress={() => { router.navigate("/category") }}>
                                     <View style={{
-                                        margin: 5,
-                                        width: 90, height: 90,
-                                        alignItems: "center"
+                                        margin: 0,
+                                        width: 100, height: 100,
+                                        alignItems: "center",
+                                        // borderWidth: 1,
                                     }}>
                                         <Image source={item.source}
                                             style={{
@@ -70,21 +71,10 @@ const data1 = [
 ]
 
 
-// const MyComponent = () => {
-
-//     return (
-//         <View>
-
-//         </View>
-
-
-
-//     )
-// }
 const styles = StyleSheet.create({
 
     list: {
-        overflow: "hidden",
+        // overflow: "hidden",
 
     },
     title: {
@@ -95,9 +85,8 @@ const styles = StyleSheet.create({
     container: {
         // borderColor: "orange",
         // borderWidth: 5,
-        overflow: "hidden",
-        paddingTop: 2,
-        paddingBottom: 10,
+        // overflow: "hidden",
+        paddingVertical: 2,
         alignSelf: "center",
         minHeight: 100,
         marginBottom: 10,

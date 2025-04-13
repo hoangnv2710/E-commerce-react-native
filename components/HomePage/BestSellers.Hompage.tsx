@@ -15,7 +15,7 @@ export default function BestSeller() {
         <View>
             <Text style={styles.title} > Best Sellers </Text>
             <FlatList
-                style={styles.container}
+                style={styles.list}
                 contentContainerStyle={{ gap: 10 }}
                 data={products}
                 renderItem={({ item }) => <ProductItem
@@ -34,9 +34,9 @@ export default function BestSeller() {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    list: {
         marginBottom: 10,
-        flex: 1,
+        height: 250,
     },
     title: {
         fontWeight: "600",

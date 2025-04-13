@@ -15,13 +15,13 @@ const products = [
 
 ];
 interface IProps {
-    title: string,
+    title?: string,
 }
 export default function ProductList(props: IProps) {
     const { title } = props;
     return (
         <View>
-            <Text style={styles.title} > {title} </Text>
+            <Text style={title ? styles.title : {}} > {title} </Text>
             <FlatList style={styles.container}
                 contentContainerStyle={{ gap: 10 }}
                 columnWrapperStyle={{ justifyContent: 'space-between' }}
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         // marginTop: 10,
         width: "100%",
         alignSelf: "center",
-
+        paddingBottom: 10,
     },
     title: {
         fontWeight: "600",
