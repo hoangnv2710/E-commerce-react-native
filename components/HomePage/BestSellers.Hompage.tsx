@@ -1,5 +1,5 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import ProductItem from "./ProductItem.HomePage";
+import ProductItem from "../List/ProductItem";
 const products = [
     { id: "1", name: "iPhone 14", price: "20", image: require("@/assets/icons/phone.jpg") },
     { id: "2", name: "MacBook Air", price: "25,000,000", image: require("@/assets/icons/mac.jpg") },

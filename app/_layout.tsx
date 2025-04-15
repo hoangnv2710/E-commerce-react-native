@@ -37,6 +37,21 @@ export default function RootLayout() {
                     />
                     <Stack.Screen
                         name="product/id"
+                        options={{
+                            headerShown: false,
+                            // title: '',
+
+                            // headerStyle: {
+                            //     backgroundColor: APP_COLOR.DARK_BLUE,
+                            // },
+                            // headerTintColor: '#fff',
+                            // headerTitleStyle: {
+                            //     fontWeight: 'bold',
+                            // },
+                        }}
+                    />
+                    <Stack.Screen
+                        name="order/checkout"
                         options={{ headerShown: false }}
                     />
                 </Stack>

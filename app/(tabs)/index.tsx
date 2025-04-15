@@ -3,7 +3,7 @@ import Address from "@/components/HomePage/Address.HomePage";
 import Banner from "@/components/HomePage/Banner.HomePage";
 import BestSeller from "@/components/HomePage/BestSellers.Hompage";
 import Categories from "@/components/HomePage/Categories .HomePage";
-import ProductList from "@/components/HomePage/ProductList.Hompage";
+import ProductList from "@/components/List/ProductList";
 import SearchBar from "@/components/HomePage/SearchBar.HomePage";
 import { Redirect } from "expo-router";
 

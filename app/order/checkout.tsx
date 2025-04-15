@@ -1,8 +1,10 @@
 import CounterBox from '@/components/Cart/CounterBox';
 import CustomBtn from '@/components/custom/Button.Custom';
+import Address from '@/components/HomePage/Address.HomePage';
 import { APP_COLOR } from '@/utils/constant';
-import { Link, router } from 'expo-router';
+import { Link } from 'expo-router';
 import { View, Text, StyleSheet, SafeAreaView, FlatList, Image, ScrollView, Pressable, TextInput } from 'react-native';
+import EvilIcons from '@expo/vector-icons/EvilIcons';
 
 
 
@@ -18,41 +20,58 @@ const data = [
 
 ];
 
-export default function Tab() {
+export default function CheckoutScreen() {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <Text style={styles.text} >My Cart</Text>
+            <Text style={styles.text} >Checkout</Text>
+            <ScrollView>
+                <View style={styles.container}>
+                    <View style={styles.address} >
+                        <View style={{ flexDirection: "row" }}>
+                            {/* <EvilIcons name="location" size={24} color="black" /> */}
+                            <Text style={styles.title}>Delivery Address</Text>
+                        </View>
+                        <Text  >
+                            User name - 09000000
+                        </Text>
+                        <Text  >
+                            144 Đ. Xuân Thủy, Dịch Vọng Hậu, Cầu Giấy, Hà Nội
+                        </Text>
+                    </View>
+                    <Text style={styles.title}>Shopping list</Text>
+                    <FlatList data={data}
+                        scrollEnabled={false}
+                        renderItem={({ item }) =>
+                            <View style={styles.item}>
+                                <View style={styles.imgContainer} >
+                                    <Image source={item.image}
+                                        style={styles.image} />
+                                </View>
 
-            <View style={styles.container}>
-                {/* <ScrollView></ScrollView> */}
-                <FlatList data={data}
-                    // scrollEnabled={false}
-                    renderItem={({ item }) =>
-                        <View style={styles.item}>
-                            <View style={styles.imgContainer} >
-                                <Image source={item.image}
-                                    style={styles.image} />
-                            </View>
+                                <View style={styles.detail}>
+                                    <Text style={styles.name}>{item.name}</Text>
+                                    <Text style={styles.price}>{item.price}</Text>
+                                </View>
 
-                            <View style={styles.detail}>
-                                <Text style={styles.name}>{item.name}</Text>
-                                <Text style={styles.price}>{item.price}</Text>
-                            </View>
-                            <View style={styles.counterContainer}>
-                                <CounterBox value={1} />
-                            </View>
-                        </View>}
-                    keyExtractor={(item) => item.id} />
-            </View>
-
+                                <View style={styles.quantity}>
+                                    <Text>x1</Text>
+                                </View>
+                            </View>}
+                        keyExtractor={(item) => item.id} />
+                    <Text style={styles.title}>Shopping options</Text>
+                    <Text>Giao hàng nhanh</Text>
+                    <Text style={styles.title}>Payment Method</Text>
+                    <Text>Cash On Delivery</Text>
+                </View>
+            </ScrollView>
             <View style={styles.checkout}>
                 <View style={styles.totalContainer}>
                     <Text style={styles.total}>Total </Text>
                     <Text style={styles.totalPrice}>0.0VND</Text>
                 </View>
                 <View style={styles.checkoutBtn}>
-                    <CustomBtn title="Check Out" onPress={() => { router.navigate("/order/checkout") }}
+                    <CustomBtn title="Pay Now" onPress={alert}
                         textStyle={{
                             color: "#fff",
                             fontSize: 18,
@@ -73,13 +92,21 @@ export default function Tab() {
 }
 
 const styles = StyleSheet.create({
+    address: {
+        // paddingLeft: 10,
+
+    },
+    title: {
+        fontSize: 16, fontWeight: "500", marginTop: 10,
+    },
     container: {
         flex: 1,
         backgroundColor: "#fff",
-        paddingHorizontal: 5,
+        paddingHorizontal: 10,
         marginTop: 10,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
+        paddingTop: 10,
         // justifyContent: 'center',
         // alignItems: 'center',
     },
@@ -94,7 +121,7 @@ const styles = StyleSheet.create({
     item: {
         height: 100,
         flex: 1,
-        borderBottomWidth: 1,
+        // borderBottomWidth: 1,
         borderColor: APP_COLOR.MEDIUM_BLUE,
         borderRadius: 5,
         paddingLeft: 10,
@@ -122,7 +149,7 @@ const styles = StyleSheet.create({
         // borderColor: APP_COLOR.LIGHT_BLUE,
     },
     detail: {
-        flex: 1,
+        flex: 2,
         // borderWidth: 1 
     },
     name: {
@@ -135,7 +162,7 @@ const styles = StyleSheet.create({
         fontSize: 15
     },
 
-    counterContainer: {
+    quantity: {
         flex: 1,
         alignItems: "center"
     },

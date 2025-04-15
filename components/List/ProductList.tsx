@@ -1,6 +1,6 @@
 import React from "react";
 import { View, FlatList, StyleSheet, Text } from "react-native";
-import ProductItem from "./ProductItem.HomePage";
+import ProductItem from "./ProductItem";
 
 
 const products = [

@@ -1,4 +1,4 @@
-import ProductList from "@/components/HomePage/ProductList.Hompage";
+import ProductList from "@/components/List/ProductList";
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 
 export default function Category() {
