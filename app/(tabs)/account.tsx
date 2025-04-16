@@ -5,6 +5,7 @@ import CustomBtn from '@/components/custom/Button.Custom';
 import Entypo from '@expo/vector-icons/Entypo';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { router } from 'expo-router';
 
 export default function Tab() {
 
@@ -35,7 +36,7 @@ export default function Tab() {
                 }}>
                     <Text style={{ paddingLeft: 20, fontSize: 18, paddingVertical: 8 }}>My order</Text>
                     <View style={styles.orderTabs}>
-                        <CustomBtn title="Packing" onPress={alert}
+                        <CustomBtn title="Packing" onPress={() => router.navigate('/order/packing')}
                             icon={<Entypo name="box" size={24} color={APP_COLOR.MEDIUM_BLUE} />}
                             btnStyle={styles.orderBtn}
                             textStyle={{ margin: 0, }} />

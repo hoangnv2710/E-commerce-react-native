@@ -54,6 +54,10 @@ export default function RootLayout() {
                         name="order/checkout"
                         options={{ headerShown: false }}
                     />
+                    <Stack.Screen
+                        name="order/packing"
+                        options={{ headerShown: false }}
+                    />
                 </Stack>
 
             </SafeAreaView>
