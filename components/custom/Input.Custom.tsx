@@ -35,8 +35,9 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     input: {
-        borderWidth: 2,
+        borderWidth: 1,
         // borderColor: APP_COLOR.LIGHT_BLUE,
+        fontSize: 18,
         borderRadius: 10,
         backgroundColor: "transparent",
     }

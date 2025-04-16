@@ -1,22 +1,24 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { router } from "expo-router";
 
 
 export default function SearchBar() {
     return (
-        <View style={styles.container}>
-
-            <View style={styles.searchInput} >
-                <FontAwesome name="search" size={24} color="blue" paddingRight="10" />
-                <Text style={{
-                    color: "blue",
-                    fontSize: 20,
-                    fontWeight: 400
-                }} >
-                    Type to search
-                </Text>
+        <Pressable onPress={() => { router.navigate('/search') }} >
+            <View style={styles.container}>
+                <View style={styles.searchInput} >
+                    <FontAwesome name="search" size={24} color="blue" paddingRight="10" />
+                    <Text style={{
+                        color: "blue",
+                        fontSize: 20,
+                        fontWeight: 400
+                    }} >
+                        Type to search
+                    </Text>
+                </View>
             </View>
-        </View>
+        </Pressable>
     )
 }
 

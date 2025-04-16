@@ -58,8 +58,14 @@ export default function RootLayout() {
                         name="order/packing"
                         options={{ headerShown: false }}
                     />
+                    <Stack.Screen
+                        name="search/index"
+                        options={{
+                            headerShown: false,
+                            // contentStyle: { backgroundColor: '#ccc' },
+                        }}
+                    />
                 </Stack>
-
             </SafeAreaView>
         </ThemeProvider>
     )

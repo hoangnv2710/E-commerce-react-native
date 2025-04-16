@@ -1,79 +1,85 @@
 import CustomBtn from "@/components/custom/Button.Custom";
 import CustomInput from "@/components/custom/Input.Custom";
 import { APP_COLOR } from "@/utils/constant";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { useState } from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function SignUpPage() {
-    const onPressFunction = () => {
-        alert('press')
-    };
+
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-
+    const [name, setName] = useState<string>("");
     return (
-        <View style={styles.container}>
-            <Text style={styles.greeting} > Welcome!</Text>
-            <View style={styles.linkContainer}>
-                <View style={styles.linkContainer}>
-                    <View >
-                        {/* <Link style={[styles.link, { color: "#ccc" }]} href={""}>Login</Link> */}
-                    </View>
-                    <View style={styles.underline}>
-                        <Text style={styles.link} >Sign up</Text>
+        <SafeAreaView style={{ flex: 1 }}>
+            <Text style={styles.greeting} >Welcome!</Text>
+            <View style={styles.container}>
+
+                <View style={styles.navigateContainer}>
+                    <View style={styles.navigateContainer}>
+                        <Pressable
+                            onPress={() => { router.replace("/") }}
+                            style={[styles.underline, { borderBottomWidth: 0 }]} >
+                            <Text style={[styles.navigate, { color: "#ccc" }]} >Login</Text>
+                        </Pressable>
+                        <View style={styles.underline}>
+                            <Text style={styles.navigate} >Sign up</Text>
+                        </View>
                     </View>
                 </View>
+                <CustomInput title="Name" value={name} setValue={setName} />
+                <CustomInput title="Email" value={email} setValue={setEmail} />
+                <CustomInput title="Password" value={password} setValue={setPassword} />
+                <CustomBtn onPress={alert}
+                    btnStyle={{
+                        marginTop: 30,
+                        paddingVertical: 10,
+                        width: "100%",
+                        backgroundColor: APP_COLOR.DARK_BLUE,
+                        borderRadius: 10,
+                    }}
+                    textStyle={{
+                        color: "#fff",
+                        fontWeight: 600,
+                        fontSize: 18
+                    }}
+                    title="SIGN UP" />
             </View>
-            <CustomInput title="Email" value={email} setValue={setEmail} />
-            <CustomInput title="Password" value={password} setValue={setPassword} />
-            <CustomBtn onPress={onPressFunction}
-                btnStyle={{
-                    marginTop: 30,
-                    paddingVertical: 10,
-                    width: "100%",
-                    backgroundColor: APP_COLOR.DARK_BLUE,
-                    borderWidth: 0,
-                    borderRadius: 10,
-                }}
-                textStyle={{
-                    color: "#fff",
-                    fontWeight: 600,
-                    fontSize: 18
-                }}
-                title="LOGIN" />
-            <Link href={'/(tabs)'}>back home</Link>
-
-
-
-        </View>
+        </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        padding: 30,
-        backgroundColor: "#e6f5ff",
-        height: "100%"
-    },
     greeting: {
         fontSize: 40,
         fontWeight: 600,
         textAlign: 'left',
+        paddingLeft: 15,
+        color: "#fff",
+        paddingVertical: 50,
     },
-    linkContainer: {
+    container: {
+        flex: 1,
+        backgroundColor: "#fff",
+        paddingHorizontal: 30,
+        paddingVertical: 20,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+    },
+
+    navigateContainer: {
         flexDirection: "row",
         gap: 10,
-        marginVertical: 50,
+        marginBottom: 20,
     },
-    link: {
+    navigate: {
         fontWeight: 700,
         fontSize: 20,
-
     },
     underline: {
         paddingBottom: 5,
         borderColor: "blue",
-        borderBottomWidth: 4,
+        borderBottomWidth: 4
     }
 })

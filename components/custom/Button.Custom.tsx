@@ -31,12 +31,11 @@ export default function CustomBtn(props: IProps) {
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
-        gap: 10,
+        // gap: 10,
         justifyContent: "center",
         alignContent: "center",
         alignItems: "center",
         borderColor: "black",
-        borderWidth: 2,
         backgroundColor: "#fff",
         borderRadius: 10,
         padding: 2,
