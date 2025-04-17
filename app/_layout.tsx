@@ -62,7 +62,14 @@ export default function RootLayout() {
                         name="search/index"
                         options={{
                             headerShown: false,
-                            // contentStyle: { backgroundColor: '#ccc' },
+
+                        }}
+                    />
+                    <Stack.Screen
+                        name="search/searchResult"
+                        options={{
+                            headerShown: false,
+
                         }}
                     />
                 </Stack>

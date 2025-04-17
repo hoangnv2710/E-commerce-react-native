@@ -2,10 +2,14 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { router } from "expo-router";
 
+interface IProps {
+    inputValue?: string;
+}
 
-export default function SearchBar() {
+export default function SearchBar(props: IProps) {
+    const { inputValue } = props;
     return (
-        <Pressable onPress={() => { router.navigate('/search') }} >
+        <Pressable onPress={() => { router.navigate(`/search?query=${encodeURIComponent(inputValue ? inputValue : "")}`) }} >
             <View style={styles.container}>
                 <View style={styles.searchInput} >
                     <FontAwesome name="search" size={24} color="blue" paddingRight="10" />
@@ -14,7 +18,7 @@ export default function SearchBar() {
                         fontSize: 20,
                         fontWeight: 400
                     }} >
-                        Type to search
+                        {inputValue ? inputValue : "Type to search"}
                     </Text>
                 </View>
             </View>

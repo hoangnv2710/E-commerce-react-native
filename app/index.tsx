@@ -58,7 +58,7 @@ export default function LogInPage() {
                         fontWeight: 600,
                         fontSize: 18
                     }}
-                    title="SIGN UP" />
+                    title="LOGIN" />
             </View>
         </SafeAreaView>
     )

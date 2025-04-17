@@ -1,17 +1,25 @@
-import { useEffect, useRef } from 'react';
+import { router } from 'expo-router';
+import { useEffect, useRef, useState } from 'react';
 import { TextInput, View, StyleSheet, StatusBar } from 'react-native';
-
+import { useLocalSearchParams } from 'expo-router';
 export default function SearchScreen() {
+    const { query } = useLocalSearchParams();
+
+    const normalizedQuery = Array.isArray(query) ? query[0] : query;
     const inputRef = useRef<TextInput>(null);
+    const [searchTerm, setSearchTerm] = useState<string>(normalizedQuery);
 
     useEffect(() => {
-        // Delay một chút để đảm bảo input đã render
         const timer = setTimeout(() => {
             inputRef.current?.focus();
         }, 100);
 
         return () => clearTimeout(timer);
     }, []);
+    const handleSearch = (input: string) => {
+        if (!input.trim()) return;
+        router.replace(`/search/searchResult?query=${encodeURIComponent(input)}`)
+    }
 
     return (
 
@@ -21,6 +29,9 @@ export default function SearchScreen() {
                 ref={inputRef}
                 placeholder="Type to search..."
                 style={styles.input}
+                value={searchTerm}
+                onChangeText={setSearchTerm}
+                onSubmitEditing={(e) => handleSearch(e.nativeEvent.text)}
             />
         </View>
     );
