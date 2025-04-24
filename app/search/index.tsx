@@ -18,7 +18,7 @@ export default function SearchScreen() {
     }, []);
     const handleSearch = (input: string) => {
         if (!input.trim()) return;
-        router.replace(`/search/searchResult?query=${encodeURIComponent(input)}`)
+        router.replace(`/search/searchResult?query=${encodeURIComponent(input.trim())}`)
     }
 
     return (

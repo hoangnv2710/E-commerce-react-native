@@ -14,7 +14,6 @@ export default function searchResult() {
             <ScrollView style={styles.container}>
                 <ProductList />
             </ScrollView>
-
         </SafeAreaView>
 
     )
@@ -29,13 +28,5 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         paddingBottom: 20,
-    },
-    name: {
-        marginTop: 10,
-        paddingLeft: 15,
-        color: "#fff",
-        fontSize: 24,
-        fontWeight: "500",
-        marginBottom: 5,
     },
 })

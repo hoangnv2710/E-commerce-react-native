@@ -40,5 +40,6 @@ const styles = StyleSheet.create({
         fontSize: 18,
         borderRadius: 10,
         backgroundColor: "transparent",
+        paddingHorizontal: 10,
     }
 })

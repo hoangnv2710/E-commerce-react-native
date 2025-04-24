@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
         height: 100,
         flex: 1,
         borderBottomWidth: 1,
-        borderColor: APP_COLOR.MEDIUM_BLUE,
+        borderColor: APP_COLOR.OPACITY,
         borderRadius: 5,
         paddingLeft: 10,
         flexDirection: "row",

@@ -1,6 +1,8 @@
 import CustomBtn from "@/components/custom/Button.Custom";
 import CustomInput from "@/components/custom/Input.Custom";
 import { APP_COLOR } from "@/utils/constant";
+import axios from "axios";
+import { registerUser } from "@/api/user.api";
 import { Link, router } from "expo-router";
 import { useState } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
@@ -11,6 +13,24 @@ export default function SignUpPage() {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [name, setName] = useState<string>("");
+
+    const handleSignUp = async () => {
+        try {
+            // const response = await axios.post('http://10.0.2.2:8084/v1/api/users/register',
+            //     {
+            //         email: email,
+            //         password: password,
+            //         name: name,
+            //     }
+            // );
+            // console.log(response.data);
+            const response = await registerUser(email, password, name)
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <Text style={styles.greeting} >Welcome!</Text>
@@ -31,7 +51,7 @@ export default function SignUpPage() {
                 <CustomInput title="Name" value={name} setValue={setName} />
                 <CustomInput title="Email" value={email} setValue={setEmail} />
                 <CustomInput title="Password" value={password} setValue={setPassword} />
-                <CustomBtn onPress={alert}
+                <CustomBtn onPress={() => handleSignUp()}
                     btnStyle={{
                         marginTop: 30,
                         paddingVertical: 10,

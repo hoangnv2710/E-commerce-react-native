@@ -21,7 +21,7 @@ export default function ProductList(props: IProps) {
     const { title } = props;
     return (
         <View>
-            <Text style={title ? styles.title : {}} > {title} </Text>
+            {title ? <Text style={styles.title}>{title}</Text> : null}
             <FlatList style={styles.container}
                 contentContainerStyle={{ gap: 10 }}
                 columnWrapperStyle={{ justifyContent: 'space-between' }}
@@ -41,11 +41,10 @@ const styles = StyleSheet.create({
         // marginTop: 10,
         width: "100%",
         alignSelf: "center",
-        paddingBottom: 10,
+        paddingVertical: 10,
     },
     title: {
         fontWeight: "600",
         fontSize: 20,
-        marginBottom: 5
     },
 })

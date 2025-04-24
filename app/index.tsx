@@ -13,7 +13,7 @@ export default function LogInPage() {
 
     useEffect(() => {
         const fetchAPI = async () => {
-            const res = await axios.get(URL_BACKEND || "http://10.0.2.2:8084");
+            const res = await axios.get(process.env.EXPO_PUBLIC_API_URL || "http://10.0.2.2:8084");
             // console.log(res.data)
         }
         fetchAPI();
