@@ -7,6 +7,8 @@ import { Link, router } from "expo-router";
 import { useState } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { ToastAndroid } from 'react-native';
+
 
 export default function SignUpPage() {
 
@@ -16,15 +18,16 @@ export default function SignUpPage() {
 
     const handleSignUp = async () => {
         try {
-            // const response = await axios.post('http://10.0.2.2:8084/v1/api/users/register',
-            //     {
-            //         email: email,
-            //         password: password,
-            //         name: name,
-            //     }
-            // );
-            // console.log(response.data);
-            const response = await registerUser(email, password, name)
+            const response = await registerUser(email, password, name);
+            // console.log(response);
+            if (response._id) {
+                ToastAndroid.show('Account registration successful!', ToastAndroid.SHORT);
+                router.replace('/');
+            } else {
+                ToastAndroid.show('Something wrong!', ToastAndroid.SHORT);
+            }
+
+
         } catch (error) {
             console.error(error);
         }

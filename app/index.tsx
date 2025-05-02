@@ -1,27 +1,32 @@
 import CustomBtn from "@/components/custom/Button.Custom";
 import CustomInput from "@/components/custom/Input.Custom";
 import { APP_COLOR } from "@/utils/constant";
-import axios from "axios";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import { Pressable, SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native";
+import { loginUser } from "@/api/user.api";
+import { ToastAndroid } from 'react-native';
+import { useAuth } from "@/context/app.context";
+
 
 export default function LogInPage() {
 
-    const URL_BACKEND = process.env.EXPO_PUBLIC_API_URL;
-    // console.log("my url", URL_BACKEND);
 
-    useEffect(() => {
-        const fetchAPI = async () => {
-            const res = await axios.get(process.env.EXPO_PUBLIC_API_URL || "http://10.0.2.2:8084");
-            // console.log(res.data)
+    const context = useAuth();
+    const handleLogin = async () => {
+        const response = await loginUser(email, password);
+        console.log(response)
+
+        if (response.token) {
+            const userData = { name: "Hoang", password: "1234" };
+            context.login(response.token, userData);
+            router.replace("/(tabs)");
+
+        } else {
+            ToastAndroid.show('Something wrong!', ToastAndroid.SHORT);
         }
-        fetchAPI();
-    }, [])
-
-    const onPressFunction = () => {
-        router.replace("/(tabs)");
     };
+
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
@@ -45,7 +50,8 @@ export default function LogInPage() {
                 </View>
                 <CustomInput title="Email" value={email} setValue={setEmail} />
                 <CustomInput title="Password" value={password} setValue={setPassword} />
-                <CustomBtn onPress={() => { router.replace("/(tabs)") }}
+                <CustomBtn onPress={() => { handleLogin() }
+                }
                     btnStyle={{
                         marginTop: 30,
                         paddingVertical: 10,

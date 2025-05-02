@@ -5,16 +5,21 @@ import CustomBtn from '@/components/custom/Button.Custom';
 import Entypo from '@expo/vector-icons/Entypo';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { useContext } from "react";
+
 import { router } from 'expo-router';
+import { useAuth } from '@/context/app.context';
+
 
 export default function Tab() {
-
+    const { user } = useAuth();
+    // console.log(context)
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <View style={styles.userInfo}>
                 <Image style={styles.avatar}
                     source={require("@/assets/icons/phone.jpg")} />
-                <Text style={styles.name} >User name</Text>
+                <Text style={styles.name} >{user.name}</Text>
                 <View style={{ flex: 1, alignItems: "flex-end" }} >
                     <CustomBtn onPress={alert}
                         btnStyle={{

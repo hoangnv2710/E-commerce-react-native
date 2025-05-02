@@ -3,6 +3,7 @@ import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { Stack } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
+import { AuthProvider } from "@/context/app.context";
 
 export default function RootLayout() {
 
@@ -14,66 +15,72 @@ export default function RootLayout() {
         },
     };
 
+
+
     return (
-        <ThemeProvider value={layoutTheme}>
-            <SafeAreaView style={{ flex: 1 }} >
-                <StatusBar backgroundColor={APP_COLOR.DARK_BLUE} />
-                <Stack  >
-                    <Stack.Screen
-                        name="index"
-                        options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                        name="(tabs)"
-                        options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                        name="(auth)/signup"
-                        options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                        name="category/index"
-                        options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                        name="product/id"
-                        options={{
-                            headerShown: false,
-                            // title: '',
+        <AuthProvider>
+            <ThemeProvider value={layoutTheme}>
 
-                            // headerStyle: {
-                            //     backgroundColor: APP_COLOR.DARK_BLUE,
-                            // },
-                            // headerTintColor: '#fff',
-                            // headerTitleStyle: {
-                            //     fontWeight: 'bold',
-                            // },
-                        }}
-                    />
-                    <Stack.Screen
-                        name="order/checkout"
-                        options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                        name="order/packing"
-                        options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                        name="search/index"
-                        options={{
-                            headerShown: false,
+                <SafeAreaView style={{ flex: 1 }} >
+                    <StatusBar backgroundColor={APP_COLOR.DARK_BLUE} />
+                    <Stack  >
+                        <Stack.Screen
+                            name="index"
+                            options={{ headerShown: false }}
+                        />
+                        <Stack.Screen
+                            name="(tabs)"
+                            options={{ headerShown: false }}
+                        />
+                        <Stack.Screen
+                            name="(auth)/signup"
+                            options={{ headerShown: false }}
+                        />
+                        <Stack.Screen
+                            name="category/index"
+                            options={{ headerShown: false }}
+                        />
+                        <Stack.Screen
+                            name="product/id"
+                            options={{
+                                headerShown: false,
+                                // title: '',
 
-                        }}
-                    />
-                    <Stack.Screen
-                        name="search/searchResult"
-                        options={{
-                            headerShown: false,
+                                // headerStyle: {
+                                //     backgroundColor: APP_COLOR.DARK_BLUE,
+                                // },
+                                // headerTintColor: '#fff',
+                                // headerTitleStyle: {
+                                //     fontWeight: 'bold',
+                                // },
+                            }}
+                        />
+                        <Stack.Screen
+                            name="order/checkout"
+                            options={{ headerShown: false }}
+                        />
+                        <Stack.Screen
+                            name="order/packing"
+                            options={{ headerShown: false }}
+                        />
+                        <Stack.Screen
+                            name="search/index"
+                            options={{
+                                headerShown: false,
 
-                        }}
-                    />
-                </Stack>
-            </SafeAreaView>
-        </ThemeProvider>
+                            }}
+                        />
+                        <Stack.Screen
+                            name="search/searchResult"
+                            options={{
+                                headerShown: false,
+
+                            }}
+                        />
+                    </Stack>
+                </SafeAreaView>
+
+            </ThemeProvider>
+        </AuthProvider>
     )
 }
