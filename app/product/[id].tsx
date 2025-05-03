@@ -2,24 +2,40 @@ import CustomBtn from "@/components/custom/Button.Custom";
 import { APP_COLOR } from "@/utils/constant";
 import { Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { useLocalSearchParams } from "expo-router";
+import { useEffect, useState } from "react";
+import { getProductById } from "@/api/product.api";
 
 export default function ProductDetail() {
+    const { id } = useLocalSearchParams();
+    const productId = Array.isArray(id) ? id[0] : id;
+
+    const [detail, setDetail] = useState<any>(null);
+    getProductById(productId);
+    useEffect(() => {
+        if (!productId) return;
+        const fetchData = async () => {
+            const data = await getProductById(productId);
+            setDetail(data);
+        }
+        fetchData();
+    }, [productId])
+
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <ScrollView>
+            <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
                 <View style={styles.container}>
-                    {/*  */}
                     <Image
-                        source={ex.image}
+                        source={{ uri: detail.imageUrl }}
                         style={styles.image} />
                     <View style={styles.infoContainer}>
-                        <Text style={styles.price}>{ex.price} VND</Text>
-                        <Text style={styles.name}>{ex.name}</Text>
+                        <Text style={styles.price}>{detail.price} VND</Text>
+                        <Text style={styles.name}>{detail.name}</Text>
 
 
                         <Text style={styles.description} >Description</Text>
-                        <Text>{ex.description} </Text>
+                        <Text>{detail.description} </Text>
                     </View>
                 </View>
             </ScrollView>

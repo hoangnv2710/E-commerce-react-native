@@ -1,7 +1,7 @@
 import React from "react";
 import { View, FlatList, StyleSheet, Text } from "react-native";
 import ProductItem from "./ProductItem";
-
+import { productType } from "@/types/global";
 
 const products = [
     { id: "1", name: "iPhone 14", price: "20", image: require("@/assets/icons/phone.jpg") },
@@ -14,20 +14,24 @@ const products = [
     { id: "8", name: "MacBook Air", price: "25,000,000", image: require("@/assets/icons/mac.jpg") },
 
 ];
+
+
+
 interface IProps {
     title?: string,
+    data: any,
 }
 export default function ProductList(props: IProps) {
-    const { title } = props;
+    const { title, data } = props;
     return (
         <View>
             {title ? <Text style={styles.title}>{title}</Text> : null}
             <FlatList style={styles.container}
                 contentContainerStyle={{ gap: 10 }}
                 columnWrapperStyle={{ justifyContent: 'space-between' }}
-                data={products}
+                data={data}
                 scrollEnabled={false}
-                renderItem={({ item }) => <ProductItem name={item.name} price={item.price} image={item.image} />}
+                renderItem={({ item }) => <ProductItem name={item.name} price={item.price} imageUrl={item.imageUrl} id={item._id} />}
                 keyExtractor={(item) => item.id}
                 numColumns={2}
             />

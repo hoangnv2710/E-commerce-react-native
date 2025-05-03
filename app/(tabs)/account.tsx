@@ -18,7 +18,9 @@ export default function Tab() {
         <SafeAreaView style={{ flex: 1 }}>
             <View style={styles.userInfo}>
                 <Image style={styles.avatar}
-                    source={require("@/assets/icons/phone.jpg")} />
+                    // source={require("@/assets/icons/phone.jpg")} http://10.0.2.2:8084
+                    source={{ uri: 'http://10.0.2.2:8084/uploads/products/1746194168225.jpg' }}
+                />
                 <Text style={styles.name} >{user.name}</Text>
                 <View style={{ flex: 1, alignItems: "flex-end" }} >
                     <CustomBtn onPress={alert}

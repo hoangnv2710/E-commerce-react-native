@@ -2,8 +2,6 @@
 import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
 import OrderItem from './OrderItem';
 
-
-
 type item = {
     productID: string,
     name: string,

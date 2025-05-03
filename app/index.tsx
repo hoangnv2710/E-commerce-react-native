@@ -10,15 +10,14 @@ import { useAuth } from "@/context/app.context";
 
 
 export default function LogInPage() {
-
-
     const context = useAuth();
+
     const handleLogin = async () => {
         const response = await loginUser(email, password);
         console.log(response)
 
         if (response.token) {
-            const userData = { name: "Hoang", password: "1234" };
+            const userData = response.userData;
             context.login(response.token, userData);
             router.replace("/(tabs)");
 

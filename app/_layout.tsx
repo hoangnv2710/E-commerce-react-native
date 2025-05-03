@@ -41,7 +41,7 @@ export default function RootLayout() {
                             options={{ headerShown: false }}
                         />
                         <Stack.Screen
-                            name="product/id"
+                            name="product/[id]"
                             options={{
                                 headerShown: false,
                                 // title: '',

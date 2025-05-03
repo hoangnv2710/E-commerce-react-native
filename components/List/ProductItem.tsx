@@ -5,26 +5,32 @@ import { View, Text, Image, StyleSheet, TouchableOpacity, StyleProp, ViewStyle, 
 
 
 interface IProps {
+    id: string,
     name: string,
     price: string,
-    image: number,
+    imageUrl: string,
     itemStyle?: StyleProp<ViewStyle>,
 }
 
 export default function ProductItem(props: IProps) {
-    const { name, price, image, itemStyle } = props;
+    const { id, name, price, imageUrl, itemStyle } = props;
     return (
-        <Pressable onPress={() => { router.navigate("/product/id") }}
+        <Pressable onPress={() => {
+            router.push({
+                pathname: "/product/[id]",
+                params: { id },
+            });
+        }}
             style={[styles.container, itemStyle]}>
             {/*  */}
             <Image
-                source={image}
+                // source={image}
+                source={{ uri: imageUrl }}
                 style={styles.image} />
             <View style={styles.infoContainer}>
                 <Text style={styles.name}>{name}</Text>
-                <Text style={styles.price}>{price} VND</Text>
+                <Text style={styles.price}>{price.toLocaleString()} VND</Text>
             </View>
-
         </Pressable>
     );
 };
