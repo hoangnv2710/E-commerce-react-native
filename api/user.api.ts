@@ -17,3 +17,16 @@ export const loginUser = async (email: string, password: string) => {
     })
     return res.data;
 }
+
+export const addToCart = async (userId: string, productId: string, quantity: number) => {
+    const res = await axiosInstance.post('/users/cart', {
+        userId, productId, quantity
+    })
+    return res.data;
+}
+
+export const getCart = async (userId: string) => {
+    // console.log("adding", userId, productId, quantity)
+    const res = await axiosInstance.get(`/users/${userId}/cart`,)
+    return res.data;
+}

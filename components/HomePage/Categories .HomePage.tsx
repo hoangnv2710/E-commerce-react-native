@@ -16,7 +16,7 @@ export default function Categories() {
                     <FlatList
                         contentContainerStyle={{ alignSelf: 'flex-start' }}
                         // numColumns={Math.ceil(data1.length / 2)}
-                        numColumns={6}
+                        numColumns={5}
                         showsVerticalScrollIndicator={false}
                         showsHorizontalScrollIndicator={false}
                         data={data1}
@@ -58,16 +58,7 @@ const data1 = [
     { key: 8, name: "Phone", source: require("@/assets/icons/phone.jpg") },
     { key: 9, name: "Phone", source: require("@/assets/icons/phone.jpg") },
     { key: 10, name: "Phone", source: require("@/assets/icons/phone.jpg") },
-    { key: 11, name: "Phone", source: require("@/assets/icons/phone.jpg") },
-    { key: 12, name: "Phone", source: require("@/assets/icons/phone.jpg") },
-    // { key: 13, name: "Phone", source: require("@/assets/icons/phone.jpg") },
-    // { key: 14, name: "Phone", source: require("@/assets/icons/phone.jpg") },
-    // { key: 15, name: "Phone", source: require("@/assets/icons/phone.jpg") },
-    // { key: 16, name: "Phone", source: require("@/assets/icons/phone.jpg") },
-    // { key: 17, name: "Phone", source: require("@/assets/icons/phone.jpg") },
-    // { key: 18, name: "Phone", source: require("@/assets/icons/phone.jpg") },
-    // { key: 19, name: "Phone", source: require("@/assets/icons/phone.jpg") },
-    // { key: 20, name: "Phone", source: require("@/assets/icons/phone.jpg") },
+
 ]
 
 

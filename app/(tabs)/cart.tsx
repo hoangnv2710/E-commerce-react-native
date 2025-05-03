@@ -1,24 +1,24 @@
+import { getCart } from '@/api/user.api';
 import CounterBox from '@/components/Cart/CounterBox';
 import CustomBtn from '@/components/custom/Button.Custom';
+import { useAuth } from '@/context/app.context';
 import { APP_COLOR } from '@/utils/constant';
 import { Link, router } from 'expo-router';
+import { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, FlatList, Image, ScrollView, Pressable, TextInput } from 'react-native';
 
 
-
-const data = [
-    { id: "1", name: "iPhone 14", price: "20", image: require("@/assets/icons/phone.jpg") },
-    { id: "2", name: "MacBook Air", price: "25,000,000", image: require("@/assets/icons/mac.jpg") },
-    { id: "3", name: "iPhone 14", price: "20,000,000", image: require("@/assets/icons/phone.jpg") },
-    { id: "4", name: "MacBook Air", price: "25,000,000", image: require("@/assets/icons/mac.jpg") },
-    { id: "5", name: "iPhone 14", price: "20,000,000", image: require("@/assets/icons/phone.jpg") },
-    { id: "6", name: "MacBook Air", price: "25,000,000", image: require("@/assets/icons/mac.jpg") },
-    { id: "7", name: "iPhone 14", price: "20,000,000", image: require("@/assets/icons/phone.jpg") },
-    { id: "8", name: "MacBook Air", price: "25,000,000", image: require("@/assets/icons/mac.jpg") },
-
-];
-
 export default function Tab() {
+    const { user } = useAuth();
+    const [cartData, getCartData] = useState<any>(null);
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await getCart(user._id);
+            getCartData(data);
+            console.log(data);
+        }
+        fetchData();
+    }, [])
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -26,24 +26,24 @@ export default function Tab() {
 
             <View style={styles.container}>
                 {/* <ScrollView></ScrollView> */}
-                <FlatList data={data}
+                <FlatList data={cartData}
                     // scrollEnabled={false}
                     renderItem={({ item }) =>
                         <View style={styles.item}>
                             <View style={styles.imgContainer} >
-                                <Image source={item.image}
+                                <Image source={{ uri: item.product.imageUrl }}
                                     style={styles.image} />
                             </View>
 
                             <View style={styles.detail}>
-                                <Text style={styles.name}>{item.name}</Text>
-                                <Text style={styles.price}>{item.price}</Text>
+                                <Text style={styles.name}>{item.product.name}</Text>
+                                <Text style={styles.price}>{item.product.price.toLocaleString()}</Text>
                             </View>
                             <View style={styles.counterContainer}>
-                                <CounterBox value={1} />
+                                <CounterBox value={item.quantity} />
                             </View>
                         </View>}
-                    keyExtractor={(item) => item.id} />
+                    keyExtractor={(item) => item.product._id} />
             </View>
 
             <View style={styles.checkout}>

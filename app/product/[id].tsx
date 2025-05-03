@@ -5,13 +5,14 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import { getProductById } from "@/api/product.api";
+import { useAuth } from "@/context/app.context";
+import { addToCart } from "@/api/user.api";
 
 export default function ProductDetail() {
     const { id } = useLocalSearchParams();
     const productId = Array.isArray(id) ? id[0] : id;
-
     const [detail, setDetail] = useState<any>(null);
-    getProductById(productId);
+
     useEffect(() => {
         if (!productId) return;
         const fetchData = async () => {
@@ -21,45 +22,54 @@ export default function ProductDetail() {
         fetchData();
     }, [productId])
 
+    const { user } = useAuth();
+    const handleAddToCart = async () => {
+        const result = await addToCart(user._id, productId, 1);
+    }
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
-                <View style={styles.container}>
-                    <Image
-                        source={{ uri: detail.imageUrl }}
-                        style={styles.image} />
-                    <View style={styles.infoContainer}>
-                        <Text style={styles.price}>{detail.price} VND</Text>
-                        <Text style={styles.name}>{detail.name}</Text>
+            {detail?.imageUrl ? (<>
+                <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
+                    <View style={styles.container}>
+                        <Image
+                            source={{ uri: detail.imageUrl }}
+                            style={styles.image} />
+
+                        <View style={styles.infoContainer}>
+                            <Text style={styles.price}>{detail.price.toLocaleString()} VND</Text>
+                            <Text style={styles.name}>{detail.name}</Text>
 
 
-                        <Text style={styles.description} >Description</Text>
-                        <Text>{detail.description} </Text>
+                            <Text style={styles.description} >Description</Text>
+                            <Text>{detail.description} </Text>
+                        </View>
+                    </View>
+
+                </ScrollView>
+                <View style={styles.checkout}>
+                    <View style={styles.totalContainer}>
+                        {/* <Text style={styles.total}>Total </Text> */}
+                        <Text style={styles.totalPrice}> {detail.price.toLocaleString()} VND</Text>
+                    </View>
+                    <View style={styles.checkoutBtn}>
+                        <CustomBtn title=" Add to cart"
+                            onPress={handleAddToCart}
+                            btnStyle={{
+
+                                padding: 8,
+                                borderWidth: 0,
+                                backgroundColor: APP_COLOR.DARK_BLUE
+                            }}
+                            textStyle={{
+                                color: "#fff",
+                                fontSize: 18
+                            }}
+                            icon={<FontAwesome name="shopping-cart" size={24} color="#fff" />} />
                     </View>
                 </View>
-            </ScrollView>
-            <View style={styles.checkout}>
-                <View style={styles.totalContainer}>
-                    {/* <Text style={styles.total}>Total </Text> */}
-                    <Text style={styles.totalPrice}> {ex.price} VND</Text>
-                </View>
-                <View style={styles.checkoutBtn}>
-                    <CustomBtn title="Add to cart"
-                        onPress={() => { alert("Thêm vào giỏ hàng thành công!") }}
-                        btnStyle={{
-
-                            padding: 8,
-                            borderWidth: 0,
-                            backgroundColor: APP_COLOR.DARK_BLUE
-                        }}
-                        textStyle={{
-                            color: "#fff",
-                            fontSize: 18
-                        }}
-                        icon={<FontAwesome name="shopping-cart" size={24} color="#fff" />} />
-                </View>
-            </View>
+            </>) :
+                (<Text style={{ flex: 1, textAlign: "center", fontSize: 30, paddingTop: 300, color: "#fff" }}>Loading...</Text>)}
         </SafeAreaView>
     );
 };
