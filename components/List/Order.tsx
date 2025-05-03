@@ -2,15 +2,19 @@
 import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
 import OrderItem from './OrderItem';
 
-type item = {
-    productID: string,
-    name: string,
-    price: string,
-    image: number,
-    quantity: number,
-}
 interface IProps {
-    data: item[]
+    data: CartItem[]
+}
+
+interface Product {
+    _id: string,
+    imageUrl: string,
+    name: string,
+    price: number,
+}
+interface CartItem {
+    product: Product;
+    quantity: number;
 }
 
 export default function Order(props: IProps) {
@@ -20,9 +24,9 @@ export default function Order(props: IProps) {
             <FlatList data={data}
                 scrollEnabled={false}
                 renderItem={({ item }) =>
-                    <OrderItem name={item.name} price={item.price} image={item.image} quantity={item.quantity} />
+                    <OrderItem name={item.product.name} price={item.product.price} imageUrl={item.product.imageUrl} quantity={item.quantity} />
                 }
-                keyExtractor={(item) => item.productID} />
+                keyExtractor={(item) => item.product._id} />
         </View>
 
     )

@@ -5,13 +5,18 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import { getProductById } from "@/api/product.api";
-import { useAuth } from "@/context/app.context";
+import { useAuth } from "@/context/AuthContext";
 import { addToCart } from "@/api/user.api";
+import { useCart } from "@/context/CartContext";
 
 export default function ProductDetail() {
     const { id } = useLocalSearchParams();
+    const { user } = useAuth();
+    const { fetchCart } = useCart();
+
     const productId = Array.isArray(id) ? id[0] : id;
     const [detail, setDetail] = useState<any>(null);
+    // const{ fe}.fetchCart(user._id);
 
     useEffect(() => {
         if (!productId) return;
@@ -22,9 +27,9 @@ export default function ProductDetail() {
         fetchData();
     }, [productId])
 
-    const { user } = useAuth();
     const handleAddToCart = async () => {
         const result = await addToCart(user._id, productId, 1);
+        fetchCart(user._id);
     }
 
     return (

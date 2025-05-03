@@ -8,7 +8,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useContext } from "react";
 
 import { router } from 'expo-router';
-import { useAuth } from '@/context/app.context';
+import { useAuth } from '@/context/AuthContext';
 
 
 export default function Tab() {

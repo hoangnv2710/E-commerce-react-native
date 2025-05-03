@@ -3,24 +3,23 @@ import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
 
 interface IProps {
     name: string,
-    price: string,
-    image: number,
+    price: number,
+    imageUrl: string,
     quantity: number,
-    // itemStyle?: StyleProp<ViewStyle>,
 }
 
 export default function OrderItem(props: IProps) {
-    const { name, price, image, quantity } = props;
+    const { name, price, imageUrl, quantity } = props;
     return (
         <View style={styles.item}>
             <View style={styles.imgContainer} >
-                <Image source={image}
+                <Image source={{ uri: imageUrl }}
                     style={styles.image} />
             </View>
 
             <View style={styles.detail}>
                 <Text style={styles.name}>{name}</Text>
-                <Text style={styles.price}>{price}</Text>
+                <Text style={styles.price}>{price.toLocaleString()}</Text>
             </View>
 
             <View style={styles.quantity}>

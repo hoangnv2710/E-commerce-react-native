@@ -1,24 +1,51 @@
 import { getCart } from '@/api/user.api';
 import CounterBox from '@/components/Cart/CounterBox';
 import CustomBtn from '@/components/custom/Button.Custom';
-import { useAuth } from '@/context/app.context';
+import { useAuth } from '@/context/AuthContext';
+import { useCart } from '@/context/CartContext';
 import { APP_COLOR } from '@/utils/constant';
 import { Link, router } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, FlatList, Image, ScrollView, Pressable, TextInput } from 'react-native';
 
+interface Product {
+    _id: string,
+    imageUrl: string,
+    name: string,
+    price: number,
+}
+interface CartItem {
+    product: Product;
+    quantity: number;
+}
 
 export default function Tab() {
     const { user } = useAuth();
-    const [cartData, getCartData] = useState<any>(null);
+    const { cartData, fetchCart, setCartData } = useCart();
+
+    // const [cartData, setCartData] = useState<CartItem[]>([]);
+    const [total, setTotal] = useState<number>(0)
+
+    // const fetchData = async () => {
+    //     const data = await getCart(user._id);
+    //     setCartData(data);
+    // }
+
     useEffect(() => {
-        const fetchData = async () => {
-            const data = await getCart(user._id);
-            getCartData(data);
-            console.log(data);
-        }
-        fetchData();
+        fetchCart(user._id);
     }, [])
+
+    useEffect(() => {
+        handleChangeTotal();
+    }, [cartData]);
+
+    const handleChangeTotal = () => {
+        let totalPrice: number = 0;
+        cartData.forEach((item: CartItem) => {
+            totalPrice += item.product.price * item.quantity;
+        })
+        setTotal(totalPrice);
+    }
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -40,7 +67,7 @@ export default function Tab() {
                                 <Text style={styles.price}>{item.product.price.toLocaleString()}</Text>
                             </View>
                             <View style={styles.counterContainer}>
-                                <CounterBox value={item.quantity} />
+                                <CounterBox updateQuantity={fetchCart} productId={item.product._id} value={item.quantity} />
                             </View>
                         </View>}
                     keyExtractor={(item) => item.product._id} />
@@ -49,7 +76,7 @@ export default function Tab() {
             <View style={styles.checkout}>
                 <View style={styles.totalContainer}>
                     <Text style={styles.total}>Total </Text>
-                    <Text style={styles.totalPrice}>0.0VND</Text>
+                    <Text style={styles.totalPrice}>{total.toLocaleString()} VND</Text>
                 </View>
                 <View style={styles.checkoutBtn}>
                     <CustomBtn title="Check Out" onPress={() => { router.navigate("/order/checkout") }}

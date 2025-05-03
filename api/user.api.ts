@@ -26,7 +26,7 @@ export const addToCart = async (userId: string, productId: string, quantity: num
 }
 
 export const getCart = async (userId: string) => {
-    // console.log("adding", userId, productId, quantity)
+    console.log("getting cart")
     const res = await axiosInstance.get(`/users/${userId}/cart`,)
     return res.data;
 }

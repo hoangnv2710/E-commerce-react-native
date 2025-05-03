@@ -2,8 +2,9 @@ import CustomBtn from '@/components/custom/Button.Custom';
 import { APP_COLOR } from '@/utils/constant';
 import { View, Text, StyleSheet, SafeAreaView, FlatList, Image, ScrollView, Pressable, TextInput } from 'react-native';
 import Order from '@/components/List/Order';
-
-
+import { useAuth } from '@/context/AuthContext';
+import { useEffect, useState } from 'react';
+import { getCart } from '@/api/user.api';
 
 const data = [
     { productID: "1", name: "iPhone 14", price: "20", image: require("@/assets/icons/phone.jpg"), quantity: 1 },
@@ -17,7 +18,41 @@ const data = [
 
 ];
 
+interface Product {
+    _id: string,
+    imageUrl: string,
+    name: string,
+    price: number,
+}
+interface CartItem {
+    product: Product;
+    quantity: number;
+}
+
 export default function CheckoutScreen() {
+    const { user } = useAuth();
+    const [cartData, setCartData] = useState<CartItem[]>([]);
+    const [total, setTotal] = useState<number>(0)
+
+    const fetchData = async () => {
+        const data = await getCart(user._id);
+        setCartData(data);
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, [])
+    useEffect(() => {
+        handleChangeTotal();
+    }, [cartData]);
+
+    const handleChangeTotal = () => {
+        let totalPrice: number = 0;
+        cartData.forEach((item: CartItem) => {
+            totalPrice += item.product.price * item.quantity;
+        })
+        setTotal(totalPrice);
+    }
 
     return (
         <SafeAreaView style={{ flex: 1, borderWidth: 2, borderColor: "red" }}>
@@ -29,22 +64,23 @@ export default function CheckoutScreen() {
                         {/* <EvilIcons name="location" size={24} color="black" /> */}
                         <Text style={styles.title}>Delivery Address</Text>
                     </View>
-                    <Text  >
-                        User name - 09000000
-                    </Text>
+                    <Text >{user.name}</Text>
+
                     <Text  >
                         144 Đ. Xuân Thủy, Dịch Vọng Hậu, Cầu Giấy, Hà Nội
                     </Text>
                 </View>
 
                 <Text style={styles.title}>Shopping list</Text>
-                <Order data={data} />
+                <Order data={cartData} />
 
                 <Text style={styles.title}>Shopping options</Text>
                 <Text>Giao hàng nhanh</Text>
+                <View style={{ paddingBottom: 10 }}>
+                    <Text style={styles.title}>Payment Method</Text>
+                    <Text>Cash On Delivery</Text>
+                </View>
 
-                <Text style={styles.title}>Payment Method</Text>
-                <Text>Cash On Delivery</Text>
                 {/* <Text style={styles.title}></Text> */}
             </ScrollView>
 
@@ -52,7 +88,7 @@ export default function CheckoutScreen() {
             <View style={styles.checkout}>
                 <View style={styles.totalContainer}>
                     <Text style={styles.total}>Total </Text>
-                    <Text style={styles.totalPrice}>0.0VND</Text>
+                    <Text style={styles.totalPrice}>{total.toLocaleString()} VND</Text>
                 </View>
                 <View style={styles.checkoutBtn}>
                     <CustomBtn title="Pay Now" onPress={alert}

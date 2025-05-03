@@ -2,15 +2,16 @@ import CustomBtn from "@/components/custom/Button.Custom";
 import CustomInput from "@/components/custom/Input.Custom";
 import { APP_COLOR } from "@/utils/constant";
 import { router } from "expo-router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Pressable, SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native";
 import { loginUser } from "@/api/user.api";
 import { ToastAndroid } from 'react-native';
-import { useAuth } from "@/context/app.context";
+import { useAuth } from "@/context/AuthContext";
+import { useCart } from "@/context/CartContext";
 
 
 export default function LogInPage() {
-    const context = useAuth();
+    const authContext = useAuth();
 
     const handleLogin = async () => {
         const response = await loginUser(email, password);
@@ -18,7 +19,9 @@ export default function LogInPage() {
 
         if (response.token) {
             const userData = response.userData;
-            context.login(response.token, userData);
+            authContext.login(response.token, userData);
+
+            ToastAndroid.show('Login successful!', ToastAndroid.SHORT);
             router.replace("/(tabs)");
 
         } else {
