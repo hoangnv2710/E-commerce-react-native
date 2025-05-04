@@ -3,16 +3,17 @@ import OrderList from '@/components/List/OrderList';
 import { useAuth } from '@/context/AuthContext';
 import { APP_COLOR } from '@/utils/constant';
 import { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, FlatList, Image, ScrollView, Pressable, TextInput, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 
 
-export default function Packing() {
+
+export default function Shipping() {
     const { user } = useAuth();
-    const [packingOrders, setPackingOrders] = useState<OrderType[]>([]);
+    const [orders, setOrders] = useState<OrderType[]>([]);
     useEffect(() => {
         const fetchOrders = async () => {
-            const data = await getOrdersByUserStatus(user._id, 'packing');
-            setPackingOrders(data);
+            const data = await getOrdersByUserStatus(user._id, 'shipping');
+            setOrders(data);
             // console.log(packingOrders)
         }
         fetchOrders();
@@ -21,9 +22,9 @@ export default function Packing() {
 
     return (
         <SafeAreaView style={{ flex: 1, borderColor: "red" }}>
-            <Text style={styles.text} >Packing</Text>
+            <Text style={styles.text} >Shipping</Text>
             <ScrollView style={styles.container}>
-                <OrderList orders={packingOrders} />
+                <OrderList orders={orders} />
             </ScrollView>
         </SafeAreaView>
     )

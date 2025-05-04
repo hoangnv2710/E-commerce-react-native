@@ -47,11 +47,11 @@ export default function Tab() {
                             icon={<Entypo name="box" size={24} color={APP_COLOR.MEDIUM_BLUE} />}
                             btnStyle={styles.orderBtn}
                             textStyle={{ margin: 0, }} />
-                        <CustomBtn title="Shipping" onPress={alert}
+                        <CustomBtn title="Shipping" onPress={() => router.navigate('/order/shipping')}
                             icon={<FontAwesome5 name="shipping-fast" size={24} color={APP_COLOR.MEDIUM_BLUE} />}
                             btnStyle={styles.orderBtn}
                             textStyle={{ margin: 0, }} />
-                        <CustomBtn title="History" onPress={alert}
+                        <CustomBtn title="History" onPress={() => router.navigate('/order/history')}
                             icon={<FontAwesome name="history" size={24} color={APP_COLOR.MEDIUM_BLUE} />}
                             btnStyle={styles.orderBtn}
                             textStyle={{ margin: 0, }} />

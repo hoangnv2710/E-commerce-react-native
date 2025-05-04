@@ -32,6 +32,19 @@ declare global {
         quantity: number;
     }
 
+    type OrderType = {
+        userId: string,
+        userDetail: {
+            phone: string,
+            address: string,
+            name: string,
+        },
+        status: string,
+        totalPrice: number,
+        items: CartItem[];
+        _id: string,
+        createdAt: Date,
+    }
 }
 
-export { productType, Product, CartItem }
+export { productType, Product, CartItem, OrderType }

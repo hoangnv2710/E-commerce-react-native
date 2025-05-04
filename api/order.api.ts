@@ -7,7 +7,13 @@ export const createOrder = async (userId: string, totalPrice: number) => {
     return res.data;
 }
 
-export const getOrder = async (userId: string, status: string) => {
+export const getOrdersByUserStatus = async (userId: string, status: string) => {
     const res = await axiosInstance.get(`/orders/?userId=${userId}&status=${status}`);
+    return res.data;
+}
+export const getOrderById = async (id: string) => {
+
+    const res = await axiosInstance.get(`/orders/${id}`);
+    // console.log("detail", res.data);
     return res.data;
 }

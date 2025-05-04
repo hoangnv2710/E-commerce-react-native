@@ -1,14 +1,7 @@
-import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image, Pressable } from 'react-native';
 import Order from './Order';
 import { APP_COLOR } from '@/utils/constant';
-
-type OrderType = {
-    status: string,
-    totalPrice: number,
-    items: CartItem[];
-    _id: string,
-    createdAt: Date,
-}
+import { router } from 'expo-router';
 
 interface IProps {
     orders: OrderType[];
@@ -22,16 +15,21 @@ export default function OrderList(props: IProps) {
                 scrollEnabled={false}
                 keyExtractor={(item) => item._id}
                 renderItem={({ item }) =>
-                    <View style={styles.orderContainer}>
-                        <View style={styles.header}>
-                            <Text>ID: {item._id}</Text>
-                            <Text style={styles.status}>{item.status}</Text>
+                    <Pressable onPress={() => {
+                        router.push({
+                            pathname: '/order/detail',
+                            params: { id: item._id }
+                        })
+                    }}>
+                        <View style={styles.orderContainer}>
+                            <View style={styles.header}>
+                                <Text>ID: {item._id}</Text>
+                                <Text style={styles.status}>{item.status}</Text>
 
+                            </View>
+                            <Order data={item.items} />
                         </View>
-
-                        <Order data={item.items} />
-                    </View>
-
+                    </Pressable>
                 } />
         </View>
     )

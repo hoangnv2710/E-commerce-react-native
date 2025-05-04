@@ -4,39 +4,61 @@ import { View, Text, StyleSheet, SafeAreaView, FlatList, Image, ScrollView, Pres
 import Order from '@/components/List/Order';
 import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
-import { createOrder } from '@/api/order.api';
-import { router } from 'expo-router';
+import { createOrder, getOrderById } from '@/api/order.api';
+import { router, useLocalSearchParams } from 'expo-router';
+import { useEffect, useState } from 'react';
 
+export default function OrderDetail() {
+    const { id } = useLocalSearchParams();
+    const orderId = Array.isArray(id) ? id[0] : id;
+    const [orderData, setOrderData] = useState<OrderType>()
+    const [buttonTitle, setButtonTitle] = useState<string>("")
+    const [handleButton, setHandleButton] = useState<() => void>(() => { })
+    // let handleButton = () => { };
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await getOrderById(orderId);
+            setOrderData(data);
+        }
+        fetchData();
+    }, [])
 
-export default function CheckoutScreen() {
-    const { user } = useAuth();
-    const { cartData, fetchCart, setCartData, totalPrice } = useCart();
-
-    const handlePayment = async () => {
-        await createOrder(user._id, totalPrice);
-        fetchCart(user._id);
-        router.replace('/order/packing')
-    }
+    useEffect(() => {
+        if (orderData?.status == 'packing') {
+            setButtonTitle("Cancel Order");
+            setHandleButton(() => () => {
+                alert("cancel");
+            });
+        } else if (orderData?.status == 'shipping') {
+            setButtonTitle("Confirm Received");
+            setHandleButton(() => () => {
+                alert("confirmReceived");
+            });
+        }
+        // else if (orderData?.status == 'delivered') {
+        //     buttonTitle = "Buy Again";
+        //     handleButton = async () => {
+        //         alert("Buy Again");
+        //     }
+        // }
+    }, [orderData])
 
     return (
         <SafeAreaView style={{ flex: 1, borderColor: "red" }}>
-            <Text style={styles.text} >Checkout</Text>
+            <Text style={styles.text} >Order detail</Text>
 
             <ScrollView style={styles.container}>
                 <View style={styles.address} >
                     <View style={{ flexDirection: "row" }}>
-                        {/* <EvilIcons name="location" size={24} color="black" /> */}
                         <Text style={styles.title}>Delivery Address</Text>
                     </View>
-                    <Text >{user.name}</Text>
-
-                    <Text  >
-                        144 Đ. Xuân Thủy, Dịch Vọng Hậu, Cầu Giấy, Hà Nội
-                    </Text>
+                    <Text>{orderData?.userDetail.name}</Text>
+                    <Text>{orderData?.userDetail.phone}</Text>
+                    <Text>{orderData?.userDetail.address}</Text>
                 </View>
 
                 <Text style={styles.title}>Shopping list</Text>
-                <Order data={cartData} />
+                <Order data={orderData?.items ?? []} />
 
                 <Text style={styles.title}>Shipping options</Text>
                 <Text>Giao hàng nhanh</Text>
@@ -44,28 +66,24 @@ export default function CheckoutScreen() {
                     <Text style={styles.title}>Payment Method</Text>
                     <Text>Cash On Delivery</Text>
                 </View>
-
-                {/* <Text style={styles.title}></Text> */}
             </ScrollView>
-
 
             <View style={styles.checkout}>
                 <View style={styles.totalContainer}>
                     <Text style={styles.total}>Total </Text>
-                    <Text style={styles.totalPrice}>{totalPrice.toLocaleString()} VND</Text>
+                    <Text style={styles.totalPrice}>{orderData?.totalPrice.toLocaleString() ?? 0} VND</Text>
                 </View>
                 <View style={styles.checkoutBtn}>
-                    <CustomBtn title="Pay Now" onPress={handlePayment}
+                    <CustomBtn title={buttonTitle} onPress={() => handleButton()}
                         textStyle={{
                             color: "#fff",
                             fontSize: 18,
-
                         }}
                         btnStyle={{
                             backgroundColor: APP_COLOR.DARK_BLUE,
                             borderWidth: 0,
                             padding: 5,
-                            paddingHorizontal: 20
+                            paddingHorizontal: 10
                         }}
                     />
                 </View>
@@ -112,7 +130,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "row",
         alignItems: "center",
-        paddingLeft: 20
+        paddingLeft: 5
     },
     totalPrice: {
         fontSize: 20,
@@ -127,7 +145,7 @@ const styles = StyleSheet.create({
         flex: 1, flexDirection: "row",
         alignItems: "center",
         justifyContent: "flex-end",
-        paddingRight: 20
+        paddingRight: 10
     },
 
 });
