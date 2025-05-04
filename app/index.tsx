@@ -8,10 +8,13 @@ import { loginUser } from "@/api/user.api";
 import { ToastAndroid } from 'react-native';
 import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
+import { useOrder } from "@/context/OrderContext";
 
 
 export default function LogInPage() {
     const authContext = useAuth();
+    const { fetchCart } = useCart();
+    const { fetchOrder } = useOrder();
 
     const handleLogin = async () => {
         const response = await loginUser(email, password);
@@ -19,11 +22,12 @@ export default function LogInPage() {
             const userData = response.userData;
             authContext.login(response.token, userData);
             ToastAndroid.show('Login successful!', ToastAndroid.SHORT);
+            await fetchCart(userData._id);
+            await fetchOrder(userData._id);
             router.replace("/(tabs)");
 
         } else {
             ToastAndroid.show(response.message, ToastAndroid.SHORT);
-
         }
     };
 

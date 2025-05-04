@@ -18,7 +18,6 @@ export default function Tab() {
         <SafeAreaView style={{ flex: 1 }}>
             <View style={styles.userInfo}>
                 <Image style={styles.avatar}
-                    // source={require("@/assets/icons/phone.jpg")} http://10.0.2.2:8084
                     source={{ uri: 'http://10.0.2.2:8084/uploads/products/1746194168225.jpg' }}
                 />
                 <Text style={styles.name} >{user.name}</Text>
@@ -43,15 +42,37 @@ export default function Tab() {
                 }}>
                     <Text style={{ paddingLeft: 20, fontSize: 18, paddingVertical: 8 }}>My order</Text>
                     <View style={styles.orderTabs}>
-                        <CustomBtn title="Packing" onPress={() => router.navigate('/order/packing')}
+                        <CustomBtn title="Packing" onPress={() =>
+                            router.push({
+                                pathname: '/order/ordersStatusList',
+                                params: {
+                                    header: "Packing"
+                                }
+                            })
+
+                        }
                             icon={<Entypo name="box" size={24} color={APP_COLOR.MEDIUM_BLUE} />}
                             btnStyle={styles.orderBtn}
                             textStyle={{ margin: 0, }} />
-                        <CustomBtn title="Shipping" onPress={() => router.navigate('/order/shipping')}
+                        <CustomBtn title="Shipping" onPress={() =>
+                            router.push({
+                                pathname: '/order/ordersStatusList',
+                                params: {
+                                    header: "Shipping"
+                                }
+                            })
+                        }
                             icon={<FontAwesome5 name="shipping-fast" size={24} color={APP_COLOR.MEDIUM_BLUE} />}
                             btnStyle={styles.orderBtn}
                             textStyle={{ margin: 0, }} />
-                        <CustomBtn title="History" onPress={() => router.navigate('/order/history')}
+                        <CustomBtn title="History" onPress={() =>
+                            router.push({
+                                pathname: '/order/ordersStatusList',
+                                params: {
+                                    header: "History"
+                                }
+                            })
+                        }
                             icon={<FontAwesome name="history" size={24} color={APP_COLOR.MEDIUM_BLUE} />}
                             btnStyle={styles.orderBtn}
                             textStyle={{ margin: 0, }} />

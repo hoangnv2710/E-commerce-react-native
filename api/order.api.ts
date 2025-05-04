@@ -17,3 +17,21 @@ export const getOrderById = async (id: string) => {
     // console.log("detail", res.data);
     return res.data;
 }
+
+export const patchOrderStatus = async (id: string, newStatus: string) => {
+
+    const res = await axiosInstance.patch(`/orders/update-status`, {
+        id, newStatus
+    });
+    // console.log("detail", res.data);
+    return res.data;
+}
+
+export const buyAgain = async (userId: string, items: CartItem[]) => {
+    await items.forEach((item) => {
+        const res = axiosInstance.post('/users/cart', {
+            userId, productId: item.product._id, quantity: item.quantity
+        })
+    })
+    // return res.data;
+}

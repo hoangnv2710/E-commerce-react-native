@@ -6,16 +6,35 @@ import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
 import { createOrder } from '@/api/order.api';
 import { router } from 'expo-router';
+import { useState } from 'react';
+import { useOrder } from '@/context/OrderContext';
 
 
 export default function CheckoutScreen() {
     const { user } = useAuth();
     const { cartData, fetchCart, setCartData, totalPrice } = useCart();
+    const { fetchOrder } = useOrder();
+    const [wait, setWait] = useState<boolean>(false);
 
     const handlePayment = async () => {
-        await createOrder(user._id, totalPrice);
-        fetchCart(user._id);
-        router.replace('/order/packing')
+        if (!wait) {
+            try {
+                setWait(true);
+                await createOrder(user._id, totalPrice);
+                await fetchCart(user._id);
+                await fetchOrder(user._id);
+                router.replace({
+                    pathname: '/order/ordersStatusList',
+                    params: {
+                        header: "Packing"
+                    }
+                })
+            } catch (error) {
+                console.log(error)
+            } finally {
+                setWait(false);
+            }
+        }
     }
 
     return (

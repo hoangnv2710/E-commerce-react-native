@@ -12,9 +12,6 @@ import { View, Text, StyleSheet, SafeAreaView, FlatList, Image, ScrollView, Pres
 export default function Tab() {
     const { user } = useAuth();
     const { cartData, fetchCart, setCartData, totalPrice } = useCart();
-    useEffect(() => {
-        fetchCart(user._id);
-    }, [])
 
     const handleCheckOut = () => {
         if (totalPrice > 0) {
@@ -29,9 +26,7 @@ export default function Tab() {
             <Text style={styles.text} >My Cart</Text>
 
             <View style={styles.container}>
-                {/* <ScrollView></ScrollView> */}
                 <FlatList data={cartData}
-                    // scrollEnabled={false}
                     renderItem={({ item }) =>
                         <View style={styles.item}>
                             <View style={styles.imgContainer} >
@@ -84,8 +79,6 @@ const styles = StyleSheet.create({
         marginTop: 10,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
-        // justifyContent: 'center',
-        // alignItems: 'center',
     },
     text: {
         marginTop: 10,
@@ -105,8 +98,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "flex-start",
         alignItems: "center",
-
-        // alignContent: "center"
     },
     imgContainer: {
         flex: 1,
@@ -121,13 +112,9 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderWidth: 1,
         borderColor: "rgba(0,0,255,0.1)",
-        // elevation: 3,
-        // borderWidth: 1,
-        // borderColor: APP_COLOR.LIGHT_BLUE,
     },
     detail: {
         flex: 1,
-        // borderWidth: 1 
     },
     name: {
         fontWeight: "500",

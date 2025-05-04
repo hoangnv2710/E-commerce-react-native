@@ -5,6 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import { AuthProvider } from "@/context/AuthContext";
 import { CartProvider } from "@/context/CartContext";
+import { OrderProvider } from "@/context/OrderContext";
 
 export default function RootLayout() {
 
@@ -16,85 +17,66 @@ export default function RootLayout() {
         },
     };
 
-
-
     return (
         <AuthProvider>
             <CartProvider>
-                <ThemeProvider value={layoutTheme}>
+                <OrderProvider>
+                    <ThemeProvider value={layoutTheme}>
+                        <SafeAreaView style={{ flex: 1 }} >
+                            <StatusBar backgroundColor={APP_COLOR.DARK_BLUE} />
+                            <Stack  >
+                                <Stack.Screen
+                                    name="index"
+                                    options={{ headerShown: false }}
+                                />
+                                <Stack.Screen
+                                    name="(tabs)"
+                                    options={{ headerShown: false }}
+                                />
+                                <Stack.Screen
+                                    name="(auth)/signup"
+                                    options={{ headerShown: false }}
+                                />
+                                <Stack.Screen
+                                    name="category/index"
+                                    options={{ headerShown: false }}
+                                />
+                                <Stack.Screen
+                                    name="product/[id]"
+                                    options={{
+                                        headerShown: false,
+                                    }}
+                                />
+                                <Stack.Screen
+                                    name="order/checkout"
+                                    options={{ headerShown: false }}
+                                />
+                                <Stack.Screen
+                                    name="order/ordersStatusList"
+                                    options={{ headerShown: false }}
+                                />
+                                <Stack.Screen
+                                    name="order/detail"
+                                    options={{ headerShown: false }}
+                                />
+                                <Stack.Screen
+                                    name="search/index"
+                                    options={{
+                                        headerShown: false,
 
-                    <SafeAreaView style={{ flex: 1 }} >
-                        <StatusBar backgroundColor={APP_COLOR.DARK_BLUE} />
-                        <Stack  >
-                            <Stack.Screen
-                                name="index"
-                                options={{ headerShown: false }}
-                            />
-                            <Stack.Screen
-                                name="(tabs)"
-                                options={{ headerShown: false }}
-                            />
-                            <Stack.Screen
-                                name="(auth)/signup"
-                                options={{ headerShown: false }}
-                            />
-                            <Stack.Screen
-                                name="category/index"
-                                options={{ headerShown: false }}
-                            />
-                            <Stack.Screen
-                                name="product/[id]"
-                                options={{
-                                    headerShown: false,
-                                    // title: '',
+                                    }}
+                                />
 
-                                    // headerStyle: {
-                                    //     backgroundColor: APP_COLOR.DARK_BLUE,
-                                    // },
-                                    // headerTintColor: '#fff',
-                                    // headerTitleStyle: {
-                                    //     fontWeight: 'bold',
-                                    // },
-                                }}
-                            />
-                            <Stack.Screen
-                                name="order/checkout"
-                                options={{ headerShown: false }}
-                            />
-                            <Stack.Screen
-                                name="order/packing"
-                                options={{ headerShown: false }}
-                            />
-                            <Stack.Screen
-                                name="order/history"
-                                options={{ headerShown: false }}
-                            />
-                            <Stack.Screen
-                                name="order/shipping"
-                                options={{ headerShown: false }}
-                            />
-                            <Stack.Screen
-                                name="order/detail"
-                                options={{ headerShown: false }}
-                            />
-                            <Stack.Screen
-                                name="search/index"
-                                options={{
-                                    headerShown: false,
-
-                                }}
-                            />
-                            <Stack.Screen
-                                name="search/searchResult"
-                                options={{
-                                    headerShown: false,
-
-                                }}
-                            />
-                        </Stack>
-                    </SafeAreaView>
-
-                </ThemeProvider>
+                                <Stack.Screen
+                                    name="search/searchResult"
+                                    options={{
+                                        headerShown: false,
+                                    }}
+                                />
+                            </Stack>
+                        </SafeAreaView>
+                    </ThemeProvider>
+                </OrderProvider>
             </CartProvider>
         </AuthProvider>
     )
