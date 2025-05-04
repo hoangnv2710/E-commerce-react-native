@@ -3,59 +3,23 @@ import { APP_COLOR } from '@/utils/constant';
 import { View, Text, StyleSheet, SafeAreaView, FlatList, Image, ScrollView, Pressable, TextInput } from 'react-native';
 import Order from '@/components/List/Order';
 import { useAuth } from '@/context/AuthContext';
-import { useEffect, useState } from 'react';
-import { getCart } from '@/api/user.api';
+import { useCart } from '@/context/CartContext';
+import { createOrder } from '@/api/order.api';
+import { router } from 'expo-router';
 
-const data = [
-    { productID: "1", name: "iPhone 14", price: "20", image: require("@/assets/icons/phone.jpg"), quantity: 1 },
-    { productID: "2", name: "MacBook Air", price: "25,000,000", image: require("@/assets/icons/mac.jpg"), quantity: 1 },
-    { productID: "3", name: "iPhone 14", price: "20,000,000", image: require("@/assets/icons/phone.jpg"), quantity: 2 },
-    { productID: "4", name: "MacBook Air", price: "25,000,000", image: require("@/assets/icons/mac.jpg"), quantity: 1 },
-    { productID: "5", name: "iPhone 14", price: "20,000,000", image: require("@/assets/icons/phone.jpg"), quantity: 4 },
-    { productID: "6", name: "MacBook Air", price: "25,000,000", image: require("@/assets/icons/mac.jpg"), quantity: 1 },
-    { productID: "7", name: "iPhone 14", price: "20,000,000", image: require("@/assets/icons/phone.jpg"), quantity: 2 },
-    { productID: "8", name: "MacBook Air", price: "25,000,000", image: require("@/assets/icons/mac.jpg"), quantity: 1 },
-
-];
-
-interface Product {
-    _id: string,
-    imageUrl: string,
-    name: string,
-    price: number,
-}
-interface CartItem {
-    product: Product;
-    quantity: number;
-}
 
 export default function CheckoutScreen() {
     const { user } = useAuth();
-    const [cartData, setCartData] = useState<CartItem[]>([]);
-    const [total, setTotal] = useState<number>(0)
+    const { cartData, fetchCart, setCartData, totalPrice } = useCart();
 
-    const fetchData = async () => {
-        const data = await getCart(user._id);
-        setCartData(data);
-    }
-
-    useEffect(() => {
-        fetchData();
-    }, [])
-    useEffect(() => {
-        handleChangeTotal();
-    }, [cartData]);
-
-    const handleChangeTotal = () => {
-        let totalPrice: number = 0;
-        cartData.forEach((item: CartItem) => {
-            totalPrice += item.product.price * item.quantity;
-        })
-        setTotal(totalPrice);
+    const handlePayment = async () => {
+        await createOrder(user._id, totalPrice);
+        fetchCart(user._id);
+        router.replace('/order/packing')
     }
 
     return (
-        <SafeAreaView style={{ flex: 1, borderWidth: 2, borderColor: "red" }}>
+        <SafeAreaView style={{ flex: 1, borderColor: "red" }}>
             <Text style={styles.text} >Checkout</Text>
 
             <ScrollView style={styles.container}>
@@ -88,10 +52,10 @@ export default function CheckoutScreen() {
             <View style={styles.checkout}>
                 <View style={styles.totalContainer}>
                     <Text style={styles.total}>Total </Text>
-                    <Text style={styles.totalPrice}>{total.toLocaleString()} VND</Text>
+                    <Text style={styles.totalPrice}>{totalPrice.toLocaleString()} VND</Text>
                 </View>
                 <View style={styles.checkoutBtn}>
-                    <CustomBtn title="Pay Now" onPress={alert}
+                    <CustomBtn title="Pay Now" onPress={handlePayment}
                         textStyle={{
                             color: "#fff",
                             fontSize: 18,
@@ -127,7 +91,6 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         paddingTop: 5,
-        borderWidth: 2,
     },
     text: {
         marginTop: 10,

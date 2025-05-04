@@ -20,6 +20,18 @@ declare global {
         category: String,
         description: String,
     }
+
+    interface Product {
+        _id: string,
+        imageUrl: string,
+        name: string,
+        price: number,
+    }
+    interface CartItem {
+        product: Product;
+        quantity: number;
+    }
+
 }
 
-export { productType }
+export { productType, Product, CartItem }

@@ -1,18 +1,36 @@
-import CustomBtn from '@/components/custom/Button.Custom';
-import Address from '@/components/HomePage/Address.HomePage';
+import { getOrder } from '@/api/order.api';
 import OrderList from '@/components/List/OrderList';
+import { useAuth } from '@/context/AuthContext';
 import { APP_COLOR } from '@/utils/constant';
+import { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, FlatList, Image, ScrollView, Pressable, TextInput, Dimensions } from 'react-native';
 
-
+type OrderType = {
+    status: string,
+    totalPrice: number,
+    items: CartItem[];
+    _id: string,
+    createdAt: Date,
+}
 
 export default function Packing() {
+    const { user } = useAuth();
+    const [packingOrders, setPackingOrders] = useState<OrderType[]>([]);
+    useEffect(() => {
+        const fetchOrders = async () => {
+            const data = await getOrder(user._id, 'packing');
+            setPackingOrders(data);
+            // console.log(packingOrders)
+        }
+        fetchOrders();
+    }, [])
+
 
     return (
-        <SafeAreaView style={{ flex: 1, borderWidth: 2, borderColor: "red" }}>
+        <SafeAreaView style={{ flex: 1, borderColor: "red" }}>
             <Text style={styles.text} >Packing</Text>
             <ScrollView style={styles.container}>
-                <OrderList />
+                <OrderList orders={packingOrders} />
             </ScrollView>
         </SafeAreaView>
     )
@@ -33,7 +51,6 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         paddingVertical: 10,
-        borderWidth: 2, borderColor: "green",
         backgroundColor: APP_COLOR.LIGHT_BLUE,
 
         // justifyContent: 'center',

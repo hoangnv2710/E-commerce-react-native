@@ -1,21 +1,11 @@
 import { getCart } from "@/api/user.api";
-import { createContext, ReactNode, useContext, useState } from "react";
-
-interface Product {
-    _id: string,
-    imageUrl: string,
-    name: string,
-    price: number,
-}
-interface CartItem {
-    product: Product,
-    quantity: number,
-}
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 
 interface CartContextType {
-    cartData: CartItem[];
-    setCartData: (data: CartItem[]) => void;
-    fetchCart: (userId: string) => void
+    cartData: CartItem[],
+    setCartData: (data: CartItem[]) => void,
+    fetchCart: (userId: string) => void,
+    totalPrice: number,
 }
 interface CartContextProps {
     children: ReactNode;
@@ -25,14 +15,29 @@ const CartContext = createContext<CartContextType | undefined>(undefined)
 
 export const CartProvider = ({ children }: CartContextProps) => {
     const [cartData, setCartData] = useState<CartItem[]>([]);
-    console.log(cartData);
+    const [totalPrice, setTotalPrice] = useState<number>(0);
+
     const fetchCart = async (userId: string) => {
         const data = await getCart(userId);
         setCartData(data);
     }
 
+    useEffect(() => {
+        handleChangeTotal();
+    }, [cartData]);
+
+    const handleChangeTotal = () => {
+        let total: number = 0;
+        cartData.forEach((item: CartItem) => {
+            total += item.product.price * item.quantity;
+        })
+        // console.log("caculate")
+        setTotalPrice(total);
+        console.log
+    }
+
     return (
-        <CartContext.Provider value={{ fetchCart, cartData, setCartData }} >
+        <CartContext.Provider value={{ fetchCart, cartData, setCartData, totalPrice }} >
             {children}
         </CartContext.Provider>
     )

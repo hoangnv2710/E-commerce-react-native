@@ -6,17 +6,6 @@ interface IProps {
     data: CartItem[]
 }
 
-interface Product {
-    _id: string,
-    imageUrl: string,
-    name: string,
-    price: number,
-}
-interface CartItem {
-    product: Product;
-    quantity: number;
-}
-
 export default function Order(props: IProps) {
     const { data } = props;
     return (

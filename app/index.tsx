@@ -15,17 +15,15 @@ export default function LogInPage() {
 
     const handleLogin = async () => {
         const response = await loginUser(email, password);
-        console.log(response)
-
         if (response.token) {
             const userData = response.userData;
             authContext.login(response.token, userData);
-
             ToastAndroid.show('Login successful!', ToastAndroid.SHORT);
             router.replace("/(tabs)");
 
         } else {
-            ToastAndroid.show('Something wrong!', ToastAndroid.SHORT);
+            ToastAndroid.show(response.message, ToastAndroid.SHORT);
+
         }
     };
 

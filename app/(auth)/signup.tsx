@@ -24,7 +24,7 @@ export default function SignUpPage() {
                 ToastAndroid.show('Account registration successful!', ToastAndroid.SHORT);
                 router.replace('/');
             } else {
-                ToastAndroid.show('Something wrong!', ToastAndroid.SHORT);
+                ToastAndroid.show(response.message, ToastAndroid.SHORT);
             }
 
 

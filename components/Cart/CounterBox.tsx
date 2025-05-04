@@ -1,6 +1,6 @@
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { APP_COLOR } from '@/utils/constant';
-import { View, Text, StyleSheet, Pressable, Alert } from 'react-native';
+import { View, Text, StyleSheet, Pressable, Alert, ToastAndroid } from 'react-native';
 import { useState } from 'react';
 import { addToCart } from '@/api/user.api';
 import { useAuth } from '@/context/AuthContext';
@@ -15,6 +15,8 @@ interface IProps {
 
 export default function CounterBox(props: IProps) {
     const { fetchCart } = useCart();
+    const [wait, setWait] = useState<boolean>(false)
+
     const { value, productId } = props;
     const { user } = useAuth();
     const showMyAlert = () => {
@@ -33,8 +35,8 @@ export default function CounterBox(props: IProps) {
                 {
                     text: "No",
                     onPress: async () => {
-                        const res = await addToCart(user._id, productId, 1 - value);
-                        fetchCart(user._id);
+                        // const res = await addToCart(user._id, productId, 1 - value);
+                        // fetchCart(user._id);
                     },
                     style: "default"
                 }
@@ -43,8 +45,6 @@ export default function CounterBox(props: IProps) {
         );
     }
 
-
-
     const onIncrease = async () => {
         const res = await addToCart(user._id, productId, 1);
         fetchCart(user._id);
@@ -52,13 +52,23 @@ export default function CounterBox(props: IProps) {
     }
 
     const onDecrease = async () => {
-        if (value > 1) {
-            const res = await addToCart(user._id, productId, -1);
-            fetchCart(user._id);
-        } else {
-            showMyAlert();
+        if (!wait) {
+            try {
+                setWait(true);
+                if (value > 1) {
+                    await addToCart(user._id, productId, -1);
+                    await fetchCart(user._id);
+                } else {
+                    showMyAlert();
+                }
+            } catch (error) {
+                console.log("error")
+            } finally {
+                setWait(false);
+            }
         }
     }
+
     return (
         <View style={styles.counterBox} >
             <Pressable onPress={onIncrease} style={styles.counterBtn} >
