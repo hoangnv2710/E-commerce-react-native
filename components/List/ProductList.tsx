@@ -19,7 +19,7 @@ const products = [
 
 interface IProps {
     title?: string,
-    data: any,
+    data: productType[],
 }
 export default function ProductList(props: IProps) {
     const { title, data } = props;
@@ -32,7 +32,7 @@ export default function ProductList(props: IProps) {
                 data={data}
                 scrollEnabled={false}
                 renderItem={({ item }) => <ProductItem name={item.name} price={item.price} imageUrl={item.imageUrl} id={item._id} />}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item) => item._id}
                 numColumns={2}
             />
         </View>

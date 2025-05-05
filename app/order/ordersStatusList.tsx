@@ -11,6 +11,12 @@ export default function OrdersStatusList() {
     const { fetchOrder, packingOrders, shippingOrders, historyOrders, orderData } = useOrder();
     const { header } = useLocalSearchParams();
 
+    useEffect(() => {
+        const fetchData = async () => {
+            await fetchOrder(user._id);
+        }
+        fetchData();
+    }, [])
     return (
         <SafeAreaView style={{ flex: 1, borderColor: "red" }}>
             <Text style={styles.text} >{header}</Text>

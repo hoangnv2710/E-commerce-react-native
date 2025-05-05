@@ -13,6 +13,13 @@ export default function Tab() {
     const { user } = useAuth();
     const { cartData, fetchCart, setCartData, totalPrice } = useCart();
 
+    useEffect(() => {
+        const fetchData = async () => {
+            await fetchCart(user._id);
+        }
+        fetchData();
+    }, [])
+
     const handleCheckOut = () => {
         if (totalPrice > 0) {
             router.navigate("/order/checkout")

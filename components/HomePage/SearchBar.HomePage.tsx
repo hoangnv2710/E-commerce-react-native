@@ -9,7 +9,7 @@ interface IProps {
 export default function SearchBar(props: IProps) {
     const { inputValue } = props;
     return (
-        <Pressable onPress={() => { router.navigate(`/search?query=${encodeURIComponent(inputValue ? inputValue : "")}`) }} >
+        <Pressable onPress={() => { router.push(`/search?query=${encodeURIComponent(inputValue ? inputValue : "")}`) }} >
             <View style={styles.container}>
                 <View style={styles.searchInput} >
                     <FontAwesome name="search" size={24} color="blue" paddingRight="10" />

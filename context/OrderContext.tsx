@@ -27,19 +27,20 @@ export const OrderProvider = ({ children }: OrderContextProps) => {
     const fetchOrder = async (userId: string) => {
         const data = await getOrdersByUserStatus(userId, '');
         setOrderData(data);
+
     }
 
 
     useEffect(() => {
         setPackingOrders(getOrderByStatus(['packing']));
-        // console.log(packingOrders)
         setShippingOrders(getOrderByStatus(['shipping']));
-        console.log(historyOrders)
         setHistoryOrders(getOrderByStatus(['delivered', 'cancelled']));
+        console.log("f order", orderData)
     }, [orderData])
 
     const getOrderByStatus = (status: string[]) => {
-        const data = orderData.filter(order => {
+        const reversedArray = orderData.slice().reverse();
+        const data = reversedArray.filter(order => {
             // console.log(status.includes(order.status))
             return status.includes(order.status)
         })

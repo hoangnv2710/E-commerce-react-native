@@ -11,14 +11,14 @@ declare module '*.jpg' {
 declare global {
     type productType = {
         __v: number,
-        _id: String,
+        _id: string,
         name: string,
         price: string,
         image: number,
         quantity: number,
-        imageUrl: String,
-        category: String,
-        description: String,
+        imageUrl: string,
+        category: string,
+        description: string,
     }
 
     interface Product {

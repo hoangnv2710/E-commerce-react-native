@@ -31,9 +31,8 @@ export const CartProvider = ({ children }: CartContextProps) => {
         cartData.forEach((item: CartItem) => {
             total += item.product.price * item.quantity;
         })
-        // console.log("caculate")
         setTotalPrice(total);
-        console.log
+        console.log("change")
     }
 
     return (

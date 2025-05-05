@@ -21,7 +21,7 @@ export default function CheckoutScreen() {
             try {
                 setWait(true);
                 await createOrder(user._id, totalPrice);
-                await fetchCart(user._id);
+                fetchCart(user._id);
                 await fetchOrder(user._id);
                 router.replace({
                     pathname: '/order/ordersStatusList',

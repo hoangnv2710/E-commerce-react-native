@@ -11,17 +11,18 @@ import { useOrder } from '@/context/OrderContext';
 export default function OrderDetail() {
     const { id } = useLocalSearchParams();
     const { fetchOrder } = useOrder();
-    const { fetchCart } = useCart();
+    const { fetchCart, cartData, totalPrice } = useCart();
     const orderId = Array.isArray(id) ? id[0] : id;
     const { user } = useAuth();
     const [orderData, setOrderData] = useState<OrderType>()
     const [buttonTitle, setButtonTitle] = useState<string>("")
     const [handleButton, setHandleButton] = useState<() => void>(() => { })
-
+    const [isBuyAgain, setIsBuyAgain] = useState<boolean>(false);
     useEffect(() => {
         const fetchData = async () => {
             const data = await getOrderById(orderId);
             setOrderData(data);
+
         }
         fetchData();
     }, [])
@@ -57,24 +58,21 @@ export default function OrderDetail() {
         else {
             setButtonTitle("Buy Again");
             setHandleButton(() => async () => {
-                // alert("Buy Again");
-                // await buyAgain(user._id, orderData?.items ?? []);
-                // await fetchCart(user._id);
-                // router.replace('/(tabs)/cart');
-                console.log("Bắt đầu buyAgain");
-                const buyAgainResult = await buyAgain(user._id, orderData?.items ?? []);
-                console.log("Kết thúc buyAgain, kết quả:", buyAgainResult);
-
-                console.log("Bắt đầu fetchCart");
-                const cartData = await fetchCart(user._id);
-                console.log("Kết thúc fetchCart, dữ liệu giỏ hàng:", cartData);
-
-                console.log("Thực hiện chuyển hướng");
+                await buyAgain(user._id, orderData?.items ?? []);
+                await fetchCart(user._id);
+                setIsBuyAgain(true);
                 router.replace('/(tabs)/cart');
-                console.log("Đã gọi router.replace")
             });
         }
     }, [orderData])
+
+    // useEffect(() => {
+    //     console.log(isBuyAgain)
+    //     if (isBuyAgain) {
+    //         router.replace('/(tabs)/cart');
+    //         setIsBuyAgain(false);
+    //     }
+    // }, [totalPrice, cartData])
 
     return (
         <SafeAreaView style={{ flex: 1, borderColor: "red" }}>
