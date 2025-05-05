@@ -32,6 +32,12 @@ declare global {
         quantity: number;
     }
 
+    type CartMinimalist = {
+        productId: string,
+        quantity: number,
+        _id: string,
+    }
+
     type OrderType = {
         userId: string,
         userDetail: {
@@ -41,10 +47,20 @@ declare global {
         },
         status: string,
         totalPrice: number,
-        items: CartItem[];
+        items: CartItem[],
         _id: string,
         createdAt: Date,
     }
+
+    type userType = {
+        _id: string,
+        address: string,
+        name: string,
+        email: string,
+        password: string,
+        phone: string,
+        cart: CartMinimalist[]
+    }
 }
 
-export { productType, Product, CartItem, OrderType }
+export { productType, Product, CartItem, OrderType, userType }

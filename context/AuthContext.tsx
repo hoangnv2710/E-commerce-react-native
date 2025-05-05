@@ -4,6 +4,7 @@ interface AuthContextType {
     user: any;
     token: string | null;
     login: (token: string, userData: any) => void;
+    setUser: (userData: any) => void;
 }
 
 
@@ -16,6 +17,7 @@ interface AuthProviderProps {
 export const AuthProvider = ({ children }: AuthProviderProps) => {
     const [token, setToken] = useState<string | null>(null);
     const [user, setUser] = useState<any>(null);
+
     const login = (token: string, userData: any) => {
         setToken(token);
         setUser(userData);
@@ -23,7 +25,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
 
     return (
-        <AuthContext.Provider value={{ user, token, login }} >
+        <AuthContext.Provider value={{ user, token, login, setUser }} >
             {children}
         </AuthContext.Provider>
     )

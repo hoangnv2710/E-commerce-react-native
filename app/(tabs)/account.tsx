@@ -22,14 +22,12 @@ export default function Tab() {
                 />
                 <Text style={styles.name} >{user.name}</Text>
                 <View style={{ flex: 1, alignItems: "flex-end" }} >
-                    <CustomBtn onPress={alert}
+                    <CustomBtn onPress={() => router.push('/(auth)/userDetail')}
                         btnStyle={{
                             backgroundColor: "transparent",
                             borderWidth: 0,
                         }}
                         icon={<Feather name="edit" size={24} color={APP_COLOR.LIGHT_BLUE} />} />
-
-
                 </View>
             </View>
 
@@ -113,7 +111,8 @@ const styles = StyleSheet.create({
         paddingLeft: 15,
         color: "#fff",
         fontSize: 24,
-        fontWeight: "500"
+        fontWeight: "500",
+        width: 250
     },
 
     orderTabs: {

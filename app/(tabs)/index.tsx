@@ -8,11 +8,13 @@ import SearchBar from "@/components/HomePage/SearchBar.HomePage";
 import { FlatList, SafeAreaView, StyleSheet, View, Text, ScrollView } from "react-native";
 import { getAllProduct, getProductById } from "@/api/product.api";
 import { useEffect, useState } from "react";
+import { useAuth } from "@/context/AuthContext";
 
 
 export default function HomePageTab() {
-
-    const [productsData, setProductsData] = useState(null)
+    const { user } = useAuth();
+    console.log(user)
+    const [productsData, setProductsData] = useState<productType[]>([])
     useEffect(() => {
         const fetchData = async () => {
             const data = await getAllProduct();
@@ -28,7 +30,7 @@ export default function HomePageTab() {
             <ScrollView
                 showsVerticalScrollIndicator={false}
                 style={{ flex: 1 }}>
-                <Address />
+                <Address address={user.address} />
                 {/* <View style={styles.line} /> */}
                 <View style={styles.body}>
                     <Banner />

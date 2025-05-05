@@ -26,6 +26,14 @@ export const addToCart = async (userId: string, productId: string, quantity: num
 }
 
 export const getCart = async (userId: string) => {
-    const res = await axiosInstance.get(`/users/${userId}/cart`,)
+    const res = await axiosInstance.get(`/users/${userId}/cart`)
     return res.data;
 }
+
+export const updateUser = async (userId: string, name: string, email: string, password: string, phone: string, address: string) => {
+    const res = await axiosInstance.patch(`/users/${userId}`, {
+        name, email, password, phone, address
+    })
+    return res.data;
+}
+

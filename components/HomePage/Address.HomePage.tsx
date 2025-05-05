@@ -1,7 +1,12 @@
 import { StyleSheet, Text, View } from "react-native";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-export default function Address() {
+interface IProps {
+    address: string,
+}
+
+export default function Address(props: IProps) {
+    const { address } = props;
     return (
         <View style={styles.address} >
             <Ionicons name="location-sharp" size={20} color="#fff" />
@@ -11,7 +16,8 @@ export default function Address() {
                 fontSize: 15,
                 fontWeight: 500
             }} >
-                144 Đ. Xuân Thủy, Dịch Vọng Hậu, Cầu Giấy, Hà Nội
+                {address}
+                {/* 144 Đ. Xuân Thủy, Dịch Vọng Hậu, Cầu Giấy, Hà Nội */}
             </Text>
         </View>
     )

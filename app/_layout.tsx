@@ -66,7 +66,12 @@ export default function RootLayout() {
 
                                     }}
                                 />
-
+                                <Stack.Screen
+                                    name="(auth)/userDetail"
+                                    options={{
+                                        headerShown: false,
+                                    }}
+                                />
                                 <Stack.Screen
                                     name="search/searchResult"
                                     options={{
