@@ -2,10 +2,10 @@ import CustomBtn from "@/components/custom/Button.Custom";
 import CustomInput from "@/components/custom/Input.Custom";
 import { APP_COLOR } from "@/utils/constant";
 import axios from "axios";
-import { registerUser, updateUser } from "@/api/user.api";
+import { registerUser, updateUser, uploadAvatar } from "@/api/user.api";
 import { Link, router } from "expo-router";
-import { useState } from "react";
-import { Image, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { useEffect, useState } from "react";
+import { Alert, Image, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ToastAndroid } from 'react-native';
 import { useAuth } from "@/context/AuthContext";
@@ -19,8 +19,8 @@ export default function AccountDetail() {
     const [name, setName] = useState<string>(user.name);
     const [number, setNumber] = useState<string>(user.phone);
     const [address, setAddress] = useState<string>(user.address);
-
-    const [image, setImage] = useState<string | null>(null);
+    const [imageUpload, setImageUpload] = useState<any>(null)
+    const [imageUri, setImageUri] = useState<string>(user.imageUrl);
 
     const pickImage = async () => {
         const result = await ImagePicker.launchImageLibraryAsync({
@@ -28,12 +28,40 @@ export default function AccountDetail() {
             allowsEditing: true,
             quality: 1,
         });
+
+        if (!result.canceled) {
+            setImageUri(result.assets[0].uri);
+            setImageUpload(result.assets[0])
+        }
     }
+
+    useEffect(() => {
+        const uploadImage = async () => {
+            if (imageUpload) {
+                const formData = new FormData();
+                formData.append("image", {
+                    uri: imageUri,
+                    name: imageUpload.fileName,
+                    type: imageUpload.mimeType,
+                } as any);
+                console.log(":::", {
+                    uri: imageUri,
+                    name: imageUpload.fileName,
+                    type: imageUpload.mimeType
+                })
+                const res = await uploadAvatar(formData);
+                console.log(">>>>", res)
+                setImageUri(res);
+            };
+        }
+        uploadImage();
+        console.log(imageUpload)
+    }, [imageUpload])
 
 
     const handleSave = async () => {
         try {
-            const result = await updateUser(user._id, name, email, password, number, address);
+            const result = await updateUser(user._id, name, email, password, number, address, imageUri);
             setUser(result);
             router.replace('/(tabs)/account');
             console.log(result);
@@ -46,7 +74,19 @@ export default function AccountDetail() {
         <SafeAreaView style={{ flex: 1 }}>
             <Text style={styles.title}>Account Detail</Text>
             <View style={styles.avatarContainer}>
-                <Image style={styles.avatar} source={{ uri: 'http://10.0.2.2:8084/uploads/products/1746194168225.jpg' }} />
+                {/* {
+                    isUpload ?
+                        <Image style={styles.avatar}
+                            source={{ uri: `${imageUri}` }} />
+                        : <Image style={styles.avatar}
+                            source={{ uri: `${process.env.EXPO_PUBLIC_SERVER_URL}${imageUri}` }} />
+
+                } */}
+                <Image style={styles.avatar}
+                    source={imageUpload ? { uri: `${imageUpload.uri}` }
+                        : { uri: `${process.env.EXPO_PUBLIC_SERVER_URL}${imageUri}` }
+                    } />
+
                 <CustomBtn onPress={pickImage}
                     btnStyle={{
                         backgroundColor: "transparent",

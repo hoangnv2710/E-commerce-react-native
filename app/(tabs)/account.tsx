@@ -5,20 +5,18 @@ import CustomBtn from '@/components/custom/Button.Custom';
 import Entypo from '@expo/vector-icons/Entypo';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { useContext } from "react";
-
 import { router } from 'expo-router';
 import { useAuth } from '@/context/AuthContext';
 
 
 export default function Tab() {
     const { user } = useAuth();
-    // console.log(context)
+
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <View style={styles.userInfo}>
                 <Image style={styles.avatar}
-                    source={{ uri: 'http://10.0.2.2:8084/uploads/products/1746194168225.jpg' }}
+                    source={{ uri: `${process.env.EXPO_PUBLIC_SERVER_URL}${user.imageUrl}` }}
                 />
                 <Text style={styles.name} >{user.name}</Text>
                 <View style={{ flex: 1, alignItems: "flex-end" }} >

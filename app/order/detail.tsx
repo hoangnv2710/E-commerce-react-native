@@ -83,9 +83,9 @@ export default function OrderDetail() {
                     <View style={{ flexDirection: "row" }}>
                         <Text style={styles.title}>Delivery Address</Text>
                     </View>
-                    <Text>{orderData?.userDetail.name}</Text>
-                    <Text>{orderData?.userDetail.phone}</Text>
-                    <Text>{orderData?.userDetail.address}</Text>
+                    <Text >Name: {orderData?.userDetail.name}</Text>
+                    <Text >Phone number: {orderData?.userDetail.phone}</Text>
+                    <Text >Address: {orderData?.userDetail.address}</Text>
                 </View>
 
                 <Text style={styles.title}>Shopping list</Text>

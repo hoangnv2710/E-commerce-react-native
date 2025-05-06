@@ -45,13 +45,11 @@ export default function CheckoutScreen() {
                 <View style={styles.address} >
                     <View style={{ flexDirection: "row" }}>
                         {/* <EvilIcons name="location" size={24} color="black" /> */}
-                        <Text style={styles.title}>Delivery Address</Text>
+                        <Text style={styles.title}>Delivery </Text>
                     </View>
-                    <Text >{user.name}</Text>
-
-                    <Text  >
-                        144 Đ. Xuân Thủy, Dịch Vọng Hậu, Cầu Giấy, Hà Nội
-                    </Text>
+                    <Text >Name: {user.name}</Text>
+                    <Text >Phone number: {user.phone}</Text>
+                    <Text >Address: {user.address}</Text>
                 </View>
 
                 <Text style={styles.title}>Shopping list</Text>

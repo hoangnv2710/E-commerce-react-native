@@ -15,10 +15,12 @@ export default function SignUpPage() {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [name, setName] = useState<string>("");
+    const [number, setNumber] = useState<string>("");
+    const [address, setAddress] = useState<string>("");
 
     const handleSignUp = async () => {
         try {
-            const response = await registerUser(email, password, name);
+            const response = await registerUser(name, email, password, number, address);
             // console.log(response);
             if (response._id) {
                 ToastAndroid.show('Account registration successful!', ToastAndroid.SHORT);
@@ -54,6 +56,8 @@ export default function SignUpPage() {
                 <CustomInput title="Name" value={name} setValue={setName} />
                 <CustomInput title="Email" value={email} setValue={setEmail} />
                 <CustomInput title="Password" value={password} setValue={setPassword} />
+                <CustomInput title="Phone number" value={number} setValue={setNumber} />
+                <CustomInput title="Address" value={address} setValue={setAddress} />
                 <CustomBtn onPress={() => handleSignUp()}
                     btnStyle={{
                         marginTop: 30,
