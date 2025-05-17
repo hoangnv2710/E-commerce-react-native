@@ -1,12 +1,28 @@
+import { getCategory } from "@/api/product.api";
 import ProductList from "@/components/List/ProductList";
+import { useLocalSearchParams } from "expo-router";
+import { useEffect, useState } from "react";
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 
 export default function Category() {
+    const { name } = useLocalSearchParams();
+    const category = Array.isArray(name) ? name[0] : name;
+
+    const [data, setData] = useState<productType[]>([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            const res = await getCategory(category);
+            setData(res);
+        }
+        fetchData();
+    }, [])
+
     return (
+
         <SafeAreaView style={{ flex: 1 }}>
-            <Text style={styles.name}>Phone</Text>
+            <Text style={styles.name}>{category}</Text>
             <ScrollView style={styles.container}>
-                <ProductList />
+                <ProductList data={data} />
             </ScrollView>
 
         </SafeAreaView>

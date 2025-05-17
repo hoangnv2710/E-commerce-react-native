@@ -42,7 +42,7 @@ export default function Tab() {
                             </View>
 
                             <View style={styles.detail}>
-                                <Text style={styles.name}>{item.product.name}</Text>
+                                <Text style={styles.name} numberOfLines={1}>{item.product.name}</Text>
                                 <Text style={styles.price}>{item.product.price.toLocaleString()}</Text>
                             </View>
                             <View style={styles.counterContainer}>

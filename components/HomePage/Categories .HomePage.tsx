@@ -22,7 +22,12 @@ export default function Categories() {
                         data={data1}
                         renderItem={({ item, index }) => {
                             return (
-                                <Pressable onPress={() => { router.navigate("/category") }}>
+                                <Pressable onPress={() => {
+                                    router.navigate({
+                                        pathname: "/category",
+                                        params: { name: item.name }
+                                    })
+                                }}>
                                     <View style={{
                                         margin: 0,
                                         width: 100, height: 100,
@@ -48,16 +53,16 @@ export default function Categories() {
 }
 
 const data1 = [
-    { key: 1, name: "Phone", source: require("@/assets/icons/phone.jpg") },
-    { key: 2, name: "Phone", source: require("@/assets/icons/phone.jpg") },
-    { key: 3, name: "Phone", source: require("@/assets/icons/phone.jpg") },
-    { key: 4, name: "Phone", source: require("@/assets/icons/phone.jpg") },
-    { key: 5, name: "Phone", source: require("@/assets/icons/phone.jpg") },
-    { key: 6, name: "Phone", source: require("@/assets/icons/phone.jpg") },
-    { key: 7, name: "Phone", source: require("@/assets/icons/phone.jpg") },
-    { key: 8, name: "Phone", source: require("@/assets/icons/phone.jpg") },
-    { key: 9, name: "Phone", source: require("@/assets/icons/phone.jpg") },
-    { key: 10, name: "Phone", source: require("@/assets/icons/phone.jpg") },
+    { key: 1, name: "Phone", source: require("@/assets/icons/Phone.jpg") },
+    { key: 2, name: "Laptop", source: require("@/assets/icons/Laptop.jpg") },
+    { key: 3, name: "Milk", source: require("@/assets/icons/Milk.jpg") },
+    { key: 4, name: "Tablet", source: require("@/assets/icons/Tablet.jpg") },
+    { key: 5, name: "Sports", source: require("@/assets/icons/Sports.jpg") },
+    { key: 6, name: "Beauty", source: require("@/assets/icons/Beauty.jpg") },
+    { key: 7, name: "Book", source: require("@/assets/icons/Book.jpg") },
+    { key: 8, name: "Electronics", source: require("@/assets/icons/Electronics.jpg") },
+    { key: 9, name: "Home Appliances", source: require("@/assets/icons/Home Appliances.jpg") },
+    { key: 10, name: "Fashion", source: require("@/assets/icons/Fashion.jpg") },
 
 ]
 
@@ -77,7 +82,7 @@ const styles = StyleSheet.create({
         // borderColor: "orange",
         // borderWidth: 5,
         // overflow: "hidden",
-        paddingVertical: 2,
+        paddingVertical: 10,
         alignSelf: "center",
         minHeight: 100,
         marginBottom: 10,

@@ -37,9 +37,12 @@ export default function ProductDetail() {
             {detail?.imageUrl ? (<>
                 <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
                     <View style={styles.container}>
-                        <Image
-                            source={{ uri: detail.imageUrl }}
-                            style={styles.image} />
+                        <View style={{ width: "100%" }}>
+                            <Image
+                                source={{ uri: detail.imageUrl }}
+                                style={styles.image} />
+                        </View>
+
 
                         <View style={styles.infoContainer}>
                             <Text style={styles.price}>{detail.price.toLocaleString()} VND</Text>
@@ -47,7 +50,7 @@ export default function ProductDetail() {
 
 
                             <Text style={styles.description} >Description</Text>
-                            <Text>{detail.description} </Text>
+                            <Text style={{ fontSize: 18 }} >{detail.description} </Text>
                         </View>
                     </View>
 
@@ -88,8 +91,9 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     image: {
-        width: "100%",
+        // width: "100%",
         height: 300,
+        resizeMode: 'contain',
         borderRadius: 10,
     },
     infoContainer: {
@@ -111,7 +115,7 @@ const styles = StyleSheet.create({
 
     },
     description: {
-        fontSize: 17,
+        fontSize: 20,
         fontWeight: "bold",
         paddingTop: 5,
         marginTop: 5,
@@ -149,29 +153,3 @@ const styles = StyleSheet.create({
         paddingRight: 20
     },
 });
-const ex = {
-    id: "1", name: "Điện thoại iphone 14", price: "20,000,000", image: require("@/assets/icons/phone.jpg"),
-    description: `
-iPhone 14 128GB là phiên bản được rất nhiều người dùng yêu thích bởi sở hữu mức giá “dễ thở" nhất. Dòng máy cũng có nhiều cải tiến về chất lượng camera và hiệu năng xử lý. Chi tiết về đặc điểm nổi bật của iPhone 14 128GB bạn hãy theo dõi trong nội dung dưới đây. 
-
- - Dung lượng 128GB: Lưu trữ lên đến 35.000 bức ảnh chất lượng cao 
-
- - Camera: Cảm biến 12MP cho phép cải thiện 49% khả năng chụp thiếu sáng
-
- - Hiệu năng: Xử lý tốc độ, mượt mà với chipset A15 Bionic, CPU 6 lõi và GPU 5 lõi
-
- - SIM: Lần đầu loại bỏ khe sim vật lý và chỉ có eSIM tại Mỹ
-
- - Tính năng mới: Khả năng chống va đập đỉnh cao cùng kết nối vệ tinh trong tình huống khẩn cấp
-
-
- LƯU Ý:
-
-- Khách hàng vui lòng quay video khui hộp để đảm bảo quyền lợi về bảo hành, đổi trả sản phẩm. Chú ý riêng với trường hợp máy có lỗi hình thức ngoài như trầy xước, bụi cam,… Quý khách vui lòng KHÔNG ACTIVE MÁY
-
-- Sản phẩm bảo hành 12 THÁNG tại trung tâm bảo hành chính hãng Apple trên toàn quốc. 
-
-- ShopDunk hỗ trợ bảo hành theo số imei,  tiếp nhận gửi bảo hành sản phẩm tại tất cả chi nhánh ShopDunk đang kinh doanh trên toàn quốc. Không hỗ trợ Quý khách hàng trả lại sản phẩm khi đã bóc tem niêm phong gói hàng, bóc seal sản phẩm, đã qua sử dụng và đã ACTIVE.
-
-- Hỗ trợ xuất hóa đơn VAT (Quý khách vui lòng chat với bộ phận CSKH của ShopDunk để cung cấp thông tin xuất hóa đơn trong vòng 2 ngày kể từ khi đặt hàng. Ngoài thời gian này, shop rất tiếc không thể hỗ trợ). Các trường hợp quý khách cung cấp thông tin không chính xác, shop không hỗ trợ xuất/ chỉnh sửa theo yêu cầu nếu hoá đơn đã được xuất trước đó.
-  ` }

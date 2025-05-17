@@ -18,7 +18,7 @@ export default function OrderItem(props: IProps) {
             </View>
 
             <View style={styles.detail}>
-                <Text style={styles.name}>{name}</Text>
+                <Text style={styles.name} numberOfLines={1}>{name}</Text>
                 <Text style={styles.price}>{price.toLocaleString()}</Text>
             </View>
 

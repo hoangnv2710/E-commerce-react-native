@@ -28,7 +28,7 @@ export default function ProductItem(props: IProps) {
                 source={{ uri: imageUrl }}
                 style={styles.image} />
             <View style={styles.infoContainer}>
-                <Text style={styles.name}>{name}</Text>
+                <Text style={styles.name} numberOfLines={1}>{name}</Text>
                 <Text style={styles.price}>{price.toLocaleString()} VND</Text>
             </View>
         </Pressable>
